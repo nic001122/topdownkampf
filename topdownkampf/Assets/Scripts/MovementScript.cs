@@ -6,7 +6,8 @@ public class MovementScript : MonoBehaviour
 {
     public float moveSpeed;
     public Rigidbody2D rb;
-    private Vector2 moveDirection;
+    public float forceNum = 3;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -16,22 +17,16 @@ public class MovementScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Inputs();
-    }
-    private void FixedUpdate()
-    {
-        Move();
-    }
-    public void Inputs()
-    {
-        float moveX = Input.GetAxisRaw("Horizontal");
-        float moveY = Input.GetAxisRaw("Vertical");
+        float steerAmount = Input.GetAxis("Horizontal") * moveSpeed * Time.deltaTime;
+        float moveAmount = Input.GetAxis("Vertical") * moveSpeed * Time.deltaTime;
+        transform.Translate(steerAmount, 0, 0);
+        transform.Translate(0, moveAmount, 0);
 
-        moveDirection = new Vector2(moveX, moveY).normalized;
-    }
-    public void Move()
-    {
-        rb.velocity = new Vector2(moveDirection.x * moveSpeed, moveDirection.y * moveSpeed);
     }
 
-}
+    
+    }
+    
+ 
+
+
