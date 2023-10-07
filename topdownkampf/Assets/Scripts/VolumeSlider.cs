@@ -2,13 +2,36 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.UI;
 
 public class VolumeSlider : MonoBehaviour
 {
-    public AudioMixer audioMixer;
+    [SerializeField] Slider volumeSlider;
+
     // Start is called before the first frame update
-    public void SetVolume(float volume)
+    public void Start()
     {
-        audioMixer.SetFloat("volume", volume);
+        if (!PlayerPrefs.HasKey("musicVolume"))
+        {
+            PlayerPrefs.SetFloat("musicVolume", 1);
+            Load();
+        }
+        else
+        {
+            Load();
+        }
+    }
+    public void SetVolume()
+    {
+        AudioListener.volume = volumeSlider.value;
+        Save();
+    }
+    private void Load()
+    {
+        volumeSlider.value = PlayerPrefs.GetFloat("musicVolume");
+    }
+    private void Save()
+    {
+        PlayerPrefs.SetFloat("musicVolume", volumeSlider.value);
     }
 }
