@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class InteractRange : MonoBehaviour
 {
+    public GameObject redRune;
+
     public void pickUpRune()
     {
         Destroy(gameObject);
+        redRune.SetActive(true);
     }
 }
