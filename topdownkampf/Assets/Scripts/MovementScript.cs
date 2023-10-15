@@ -25,14 +25,14 @@ public class MovementScript : MonoBehaviour
     {
         float steerAmount = Input.GetAxis("Horizontal") * moveSpeed * Time.deltaTime;
         float moveAmount = Input.GetAxis("Vertical") * moveSpeed * Time.deltaTime;
-        transform.Translate(steerAmount, 0, 0);
-        transform.Translate(0, moveAmount, 0); 
+        transform.Translate(steerAmount, moveAmount, 0);
 
         if(steerAmount > 0)
         {
             lookingVertical = false;
             lookingHorizontal = true;
 
+            verticalMoveDirection = -1;
             horizontalMoveDirection = 1;
             gameObject.transform.localScale = new Vector3(horizontalMoveDirection, verticalMoveDirection, 1);
         }
@@ -42,8 +42,15 @@ public class MovementScript : MonoBehaviour
             lookingVertical = false;
             lookingHorizontal = true;
 
+            verticalMoveDirection = 1;
             horizontalMoveDirection = -1;
             gameObject.transform.localScale = new Vector3(horizontalMoveDirection, verticalMoveDirection, 1);
+        }
+
+        if(steerAmount == 0)
+        {
+            verticalMoveDirection = 1;
+            horizontalMoveDirection = 1;
         }
 
         if(moveAmount > 0)
@@ -51,6 +58,7 @@ public class MovementScript : MonoBehaviour
             lookingVertical = true;
             lookingHorizontal = false;
 
+            horizontalMoveDirection = 1;
             verticalMoveDirection = 1;
             gameObject.transform.localScale = new Vector3(horizontalMoveDirection, verticalMoveDirection, 1);
         }
@@ -60,6 +68,7 @@ public class MovementScript : MonoBehaviour
             lookingVertical = true;
             lookingHorizontal = false;
 
+            horizontalMoveDirection = -1;
             verticalMoveDirection = -1;
             gameObject.transform.localScale = new Vector3(horizontalMoveDirection, verticalMoveDirection, 1);
         }
