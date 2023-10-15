@@ -6,7 +6,11 @@ public class PlayerController : MonoBehaviour
 {
     
     [SerializeField] public int health = 10;
-    public GameObject attackRange = default;
+    public GameObject attackRangeHorizontal = default;
+
+    public GameObject attackRangeVertical = default;
+
+    public MovementScript movementScript;
 
     public bool isAttacking = false;
 
@@ -33,15 +37,25 @@ public class PlayerController : MonoBehaviour
             {
                 isAttacking = false;
                 timer = 0;
-                attackRange.SetActive(isAttacking);
+                attackRangeHorizontal.SetActive(isAttacking);
+                attackRangeVertical.SetActive(isAttacking);
             }
         }
     }
 
     public void attack()
     {
+        if(movementScript.lookingHorizontal)
+        {
         isAttacking = true;
-        attackRange.SetActive(isAttacking);
+        attackRangeHorizontal.SetActive(isAttacking);            
+        }
+
+        if(movementScript.lookingVertical)
+        {
+            isAttacking = true;
+            attackRangeVertical.SetActive(isAttacking);
+        }
     }
     
     public void TakeDamage(int damage)
