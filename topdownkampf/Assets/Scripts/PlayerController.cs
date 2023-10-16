@@ -6,16 +6,18 @@ public class PlayerController : MonoBehaviour
 {
     
     [SerializeField] public int health = 10;
-    public GameObject attackRangeHorizontal = default;
+    public GameObject attackRangeNorth = default;
+    public GameObject attackRangeSouth = default;
 
-    public GameObject attackRangeVertical = default;
+    public GameObject attackRangeEast = default;
+    public GameObject attackRangeWest = default;
 
     public MovementScript movementScript;
 
     public bool isAttacking = false;
 
     private float timeToAttack = 0.25f;
-    private float timer = 0f;
+    [SerializeField] private float timer = 0f;
 
     public void Start()
     {
@@ -33,28 +35,48 @@ public class PlayerController : MonoBehaviour
         {
             timer += Time.deltaTime;
 
-            if (timer >= timeToAttack)
+            if(timer >= timeToAttack)
             {
                 isAttacking = false;
                 timer = 0;
-                attackRangeHorizontal.SetActive(isAttacking);
-                attackRangeVertical.SetActive(isAttacking);
+
+                attackRangeNorth.SetActive(isAttacking);
+                attackRangeSouth.SetActive(isAttacking);
+
+                attackRangeEast.SetActive(isAttacking);
+                attackRangeWest.SetActive(isAttacking);
             }
         }
     }
 
     public void attack()
     {
-        if(movementScript.lookingHorizontal)
-        {
-        isAttacking = true;
-        attackRangeHorizontal.SetActive(isAttacking);            
-        }
-
-        if(movementScript.lookingVertical)
+        // Looking right
+        if(movementScript.lookingEast)
         {
             isAttacking = true;
-            attackRangeVertical.SetActive(isAttacking);
+            attackRangeEast.SetActive(isAttacking);
+        }
+
+        // Looking left
+        if(movementScript.lookingWest)
+        {
+            isAttacking = true;
+            attackRangeWest.SetActive(isAttacking);
+        }
+
+        // Looking Up
+        if(movementScript.lookingNorth)
+        {
+            isAttacking = true;
+            attackRangeNorth.SetActive(isAttacking);
+        }
+
+        // Looking Down
+        if(movementScript.lookingSouth)
+        {
+            isAttacking = true;
+            attackRangeSouth.SetActive(isAttacking);
         }
     }
     

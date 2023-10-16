@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class MovementScript : MonoBehaviour
 {
@@ -11,8 +13,19 @@ public class MovementScript : MonoBehaviour
     public float horizontalMoveDirection;
     public float verticalMoveDirection;
 
-    public bool lookingVertical;
-    public bool lookingHorizontal;
+    public bool lookingNorth;
+    public bool lookingSouth;
+
+    [SerializeField] public bool lookingEast;
+    public bool lookingWest;
+
+    public SpriteRenderer spriteRenderer;
+
+    public Sprite movingTopRight;
+    public Sprite movingLeft;
+    public Sprite movingUp;
+    public Sprite movingDown;
+    public Sprite movingBottomRight;
 
     // Start is called before the first frame update
     void Start()
@@ -27,50 +40,83 @@ public class MovementScript : MonoBehaviour
         float moveAmount = Input.GetAxis("Vertical") * moveSpeed * Time.deltaTime;
         transform.Translate(steerAmount, moveAmount, 0);
 
+        // Moving right
         if(steerAmount > 0)
         {
-            lookingVertical = false;
-            lookingHorizontal = true;
+            lookingEast = true;
 
-            verticalMoveDirection = -1;
-            horizontalMoveDirection = 1;
-            gameObject.transform.localScale = new Vector3(horizontalMoveDirection, verticalMoveDirection, 1);
+            lookingNorth = false;
+            lookingSouth = false;
+            lookingWest = false;
+            
+            spriteRenderer.sprite = movingLeft;
+            gameObject.transform.localScale = new Vector3(-1, 1, 1);
         }
 
-        else if (steerAmount < 0)
+        // Moving left
+        else if(steerAmount < 0)
         {
-            lookingVertical = false;
-            lookingHorizontal = true;
+            lookingWest = true;
 
-            verticalMoveDirection = 1;
-            horizontalMoveDirection = -1;
-            gameObject.transform.localScale = new Vector3(horizontalMoveDirection, verticalMoveDirection, 1);
+            lookingEast = false;
+            lookingSouth = false;
+            lookingNorth = false;
+
+            spriteRenderer.sprite = movingLeft;
+            gameObject.transform.localScale = new Vector3(1, 1, 1);
+
         }
 
-        if(steerAmount == 0)
-        {
-            verticalMoveDirection = 1;
-            horizontalMoveDirection = 1;
-        }
-
+        // Moving up
         if(moveAmount > 0)
         {
-            lookingVertical = true;
-            lookingHorizontal = false;
+            lookingNorth = true;
+            
+            lookingSouth = false;
+            lookingEast = false;
+            lookingWest = false;
 
-            horizontalMoveDirection = 1;
-            verticalMoveDirection = 1;
-            gameObject.transform.localScale = new Vector3(horizontalMoveDirection, verticalMoveDirection, 1);
+            spriteRenderer.sprite = movingUp;
         }
 
+        // Moving down
         else if(moveAmount < 0)
         {
-            lookingVertical = true;
-            lookingHorizontal = false;
+            lookingSouth = true;
 
-            horizontalMoveDirection = -1;
-            verticalMoveDirection = -1;
-            gameObject.transform.localScale = new Vector3(horizontalMoveDirection, verticalMoveDirection, 1);
+            lookingNorth = false;
+            lookingEast = false;
+            lookingWest = false;
+
+            spriteRenderer.sprite = movingDown;
+        }
+
+        // Moving up & right
+        if(steerAmount > 0 && moveAmount > 0)
+        {   
+            gameObject.transform.localScale = new Vector3(1, 1, 1);
+            spriteRenderer.sprite = movingTopRight;
+        }
+
+        // Moving up & left
+        else if(steerAmount < 0 && moveAmount > 0)
+        {
+            gameObject.transform.localScale = new Vector3(-1, 1, 1);
+            spriteRenderer.sprite = movingTopRight;
+        }
+
+        // Moving down & right
+        if(steerAmount > 0 && moveAmount < 0)
+        {   
+            gameObject.transform.localScale = new Vector3(1, 1, 1);
+            spriteRenderer.sprite = movingBottomRight;
+        }
+
+        // Moving down & left
+        else if(steerAmount < 0 && moveAmount < 0)
+        {
+            gameObject.transform.localScale = new Vector3(-1, 1, 1);
+            spriteRenderer.sprite = movingBottomRight;
         }
     }
 }
