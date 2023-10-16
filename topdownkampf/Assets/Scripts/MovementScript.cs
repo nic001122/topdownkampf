@@ -19,6 +19,12 @@ public class MovementScript : MonoBehaviour
     [SerializeField] public bool lookingEast;
     public bool lookingWest;
 
+    public bool lookingNorthEast;
+    public bool lookingNorthWest;
+
+    public bool lookingSouthEast;
+    public bool lookingSouthWest;
+
     public SpriteRenderer spriteRenderer;
 
     public Sprite movingTopRight;
@@ -48,6 +54,11 @@ public class MovementScript : MonoBehaviour
             lookingNorth = false;
             lookingSouth = false;
             lookingWest = false;
+
+            lookingNorthEast = false;
+            lookingNorthWest = false;
+            lookingSouthEast = false;
+            lookingSouthWest = false;
             
             spriteRenderer.sprite = movingLeft;
             gameObject.transform.localScale = new Vector3(-1, 1, 1);
@@ -61,6 +72,11 @@ public class MovementScript : MonoBehaviour
             lookingEast = false;
             lookingSouth = false;
             lookingNorth = false;
+
+            lookingNorthEast = false;
+            lookingNorthWest = false;
+            lookingSouthEast = false;
+            lookingSouthWest = false;
 
             spriteRenderer.sprite = movingLeft;
             gameObject.transform.localScale = new Vector3(1, 1, 1);
@@ -76,6 +92,11 @@ public class MovementScript : MonoBehaviour
             lookingEast = false;
             lookingWest = false;
 
+            lookingNorthEast = false;
+            lookingNorthWest = false;
+            lookingSouthEast = false;
+            lookingSouthWest = false;
+
             spriteRenderer.sprite = movingUp;
         }
 
@@ -88,12 +109,28 @@ public class MovementScript : MonoBehaviour
             lookingEast = false;
             lookingWest = false;
 
+            lookingNorthEast = false;
+            lookingNorthWest = false;
+            lookingSouthEast = false;
+            lookingSouthWest = false;
+
             spriteRenderer.sprite = movingDown;
         }
 
         // Moving up & right
         if(steerAmount > 0 && moveAmount > 0)
-        {   
+        {
+            lookingNorthEast = true;
+
+            lookingNorthWest = false;
+            lookingSouthEast = false;
+            lookingSouthWest = false;
+
+            lookingNorth = false;
+            lookingSouth = false;
+            lookingEast = false;
+            lookingWest = false;
+
             gameObject.transform.localScale = new Vector3(1, 1, 1);
             spriteRenderer.sprite = movingTopRight;
         }
@@ -101,13 +138,35 @@ public class MovementScript : MonoBehaviour
         // Moving up & left
         else if(steerAmount < 0 && moveAmount > 0)
         {
+            lookingNorthWest = true;
+
+            lookingNorthEast = false;
+            lookingSouthWest = false;
+            lookingSouthEast = false;
+
+            lookingNorth = false;
+            lookingSouth = false;
+            lookingEast = false;
+            lookingWest = false;
+
             gameObject.transform.localScale = new Vector3(-1, 1, 1);
             spriteRenderer.sprite = movingTopRight;
         }
 
         // Moving down & right
         if(steerAmount > 0 && moveAmount < 0)
-        {   
+        {
+            lookingSouthEast = true;
+
+            lookingSouthWest = false;
+            lookingNorthEast = false;
+            lookingNorthWest = false;
+
+            lookingNorth = false;
+            lookingSouth = false;
+            lookingEast = false;
+            lookingWest = false;
+
             gameObject.transform.localScale = new Vector3(1, 1, 1);
             spriteRenderer.sprite = movingBottomRight;
         }
@@ -115,6 +174,17 @@ public class MovementScript : MonoBehaviour
         // Moving down & left
         else if(steerAmount < 0 && moveAmount < 0)
         {
+            lookingSouthWest = true;
+
+            lookingSouthEast = false;
+            lookingNorthEast = false;
+            lookingNorthEast = false;
+
+            lookingNorth = false;
+            lookingSouth = false;
+            lookingEast = false;
+            lookingWest = false;
+
             gameObject.transform.localScale = new Vector3(-1, 1, 1);
             spriteRenderer.sprite = movingBottomRight;
         }

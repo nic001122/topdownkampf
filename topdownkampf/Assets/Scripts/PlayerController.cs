@@ -12,6 +12,12 @@ public class PlayerController : MonoBehaviour
     public GameObject attackRangeEast = default;
     public GameObject attackRangeWest = default;
 
+    public GameObject attackRangeNorthEast = default;
+    public GameObject attackRangeNorthWest = default;
+
+    public GameObject attackRangeSouthEast = default;
+    public GameObject attackRangeSouthWest = default;
+
     public MovementScript movementScript;
 
     public bool isAttacking = false;
@@ -42,9 +48,15 @@ public class PlayerController : MonoBehaviour
 
                 attackRangeNorth.SetActive(isAttacking);
                 attackRangeSouth.SetActive(isAttacking);
-
+                
                 attackRangeEast.SetActive(isAttacking);
                 attackRangeWest.SetActive(isAttacking);
+
+                attackRangeNorthEast.SetActive(isAttacking);
+                attackRangeNorthWest.SetActive(isAttacking);
+
+                attackRangeSouthEast.SetActive(isAttacking);
+                attackRangeSouthWest.SetActive(isAttacking);
             }
         }
     }
@@ -77,6 +89,34 @@ public class PlayerController : MonoBehaviour
         {
             isAttacking = true;
             attackRangeSouth.SetActive(isAttacking);
+        }
+
+        // Looking up & right
+        if(movementScript.lookingNorthEast)
+        {
+            isAttacking = true;
+            attackRangeNorthEast.SetActive(isAttacking);
+        }
+
+        // Looking up & left
+        if(movementScript.lookingNorthWest)
+        {
+            isAttacking = true;
+            attackRangeNorthWest.SetActive(isAttacking);
+        }
+
+        // Looking down & right
+        if(movementScript.lookingSouthEast)
+        {
+            isAttacking = true;
+            attackRangeSouthEast.SetActive(isAttacking);
+        }
+
+        // Looking down & left
+        if(movementScript.lookingSouthWest)
+        {
+            isAttacking = true;
+            attackRangeSouthWest.SetActive(isAttacking);
         }
     }
     
