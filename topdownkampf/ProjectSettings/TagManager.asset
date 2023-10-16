@@ -5,6 +5,15 @@ TagManager:
   serializedVersion: 2
   tags:
   - AttackRange
+  - Enemy
+  - Enemy Scan NorthWest
+  - Enemy Scan SouthWest
+  - Enemy Scan SouthEast
+  - Enemy Scan North
+  - Enemy Scan South
+  - Enemy Scan East
+  - Enemy Scan West
+  - Enemy Scan NorthEast
   layers:
   - Default
   - TransparentFX
