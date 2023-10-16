@@ -7,10 +7,10 @@ public class MainMenuScript : MonoBehaviour
 {
     // Start is called before the first frame update
    
-    public void StartButton()
-    {
-        SceneManager.LoadScene(1);
-    }
+    //public void StartButton()
+    //{
+    //    SceneManager.LoadScene(1);
+    //}
 
     public void QuitButton()
     {
