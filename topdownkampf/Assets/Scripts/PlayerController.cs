@@ -1,11 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography.X509Certificates;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    
-    [SerializeField] public int health = 10;
     public GameObject attackRangeNorth = default;
     public GameObject attackRangeSouth = default;
 
@@ -18,7 +17,10 @@ public class PlayerController : MonoBehaviour
     public GameObject attackRangeSouthEast = default;
     public GameObject attackRangeSouthWest = default;
 
+
     public MovementScript movementScript;
+    
+    public Health health;
 
     public bool isAttacking = false;
 
@@ -118,10 +120,5 @@ public class PlayerController : MonoBehaviour
             isAttacking = true;
             attackRangeSouthWest.SetActive(isAttacking);
         }
-    }
-    
-    public void TakeDamage(int damage)
-    {
-        health -= damage;
-    }
+    }   
 }

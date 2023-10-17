@@ -6,14 +6,14 @@ TagManager:
   tags:
   - AttackRange
   - Enemy
-  - Enemy Scan NorthWest
-  - Enemy Scan SouthWest
-  - Enemy Scan SouthEast
-  - Enemy Scan North
-  - Enemy Scan South
-  - Enemy Scan East
-  - Enemy Scan West
-  - Enemy Scan NorthEast
+  - Enemy Attack Range NorthWest
+  - Enemy Attack Range NorthEast
+  - Enemy Attack Range SouthWest
+  - Enemy Attack Range SouthEast
+  - Enemy Attack Range North
+  - Enemy Attack Range South
+  - Enemy Attack Range West
+  - Enemy Attack Range East
   layers:
   - Default
   - TransparentFX
