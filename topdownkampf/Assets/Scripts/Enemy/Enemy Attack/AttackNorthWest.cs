@@ -2,33 +2,58 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class AttackNorthWest : MonoBehaviour
 {
-    public GameObject attackNorthWestScan = default;
+    public EnemyDetermineChildren enemyDetermineChildren;
 
+    [SerializeField] bool playerIsInRange = false;
+    [SerializeField] bool isAttacking = false;
 
-    public GameObject attackRangeNorthWest = default;
+    [SerializeField] float timeBtwAttack = 0.25f;
+    [SerializeField] float btwAttackTimer = 0f;
 
     // Start is called before the first frame update
     void Start()
     {
-        attackNorthWestScan = transform.GetChild(0).gameObject;
 
-        attackRangeNorthWest = transform.GetChild(0).gameObject;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if(playerIsInRange)
+        {
+            enemyDetermineChildren.attackRangeNorthWest.SetActive(true);
+            isAttacking = true;
+        }
+
+        if(isAttacking)
+        {
+            btwAttackTimer += Time.deltaTime;
+        }
+
+        if(btwAttackTimer >= timeBtwAttack)
+        {
+            enemyDetermineChildren.attackRangeNorthWest.SetActive(false);
+            isAttacking = false;
+
+            btwAttackTimer = 0f;
+            Debug.Log("Attacked");
+        }
     }
 
     void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.CompareTag("Player"))
         {
-            attackRangeNorthWest.SetActive(true);
+            playerIsInRange = true;
         }
+    }
+
+    void OnTriggerExit2D()
+    {
+        playerIsInRange = false;
     }
 }
