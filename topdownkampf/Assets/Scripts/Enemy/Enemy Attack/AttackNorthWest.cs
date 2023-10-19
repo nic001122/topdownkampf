@@ -12,6 +12,7 @@ public class AttackNorthWest : MonoBehaviour
 
     [SerializeField] float timeBtwAttack = 0.25f;
     [SerializeField] float btwAttackTimer = 0f;
+    [SerializeField] float timerBeforeFirstAttack = 0f;
 
     // Start is called before the first frame update
     void Start()
@@ -33,14 +34,25 @@ public class AttackNorthWest : MonoBehaviour
             enemyDetermineChildren.isAttackingSouth == false &&
 
             enemyDetermineChildren.isAttackingWest == false &&
-            enemyDetermineChildren.isAttackingEast == false
+            enemyDetermineChildren.isAttackingEast == false &&
+
+            timerBeforeFirstAttack > 0f
         )
         
         {
             if(playerIsInRange)
             {
-                enemyDetermineChildren.attackRangeNorthWest.SetActive(true);
-                enemyDetermineChildren.isAttackingNorthWest = true;
+                timerBeforeFirstAttack += Time.deltaTime;
+                if(timerBeforeFirstAttack >= 1)
+                {
+                    enemyDetermineChildren.attackRangeNorthWest.SetActive(true);
+                    enemyDetermineChildren.isAttackingNorthWest = true;
+
+                    if(btwAttackTimer >= timeBtwAttack)
+                    {
+                        enemyDetermineChildren.attackRangeNorthWest.SetActive(false);
+                    }
+                }
             }
 
             if(enemyDetermineChildren.isAttackingNorthWest)
@@ -55,6 +67,16 @@ public class AttackNorthWest : MonoBehaviour
 
                 btwAttackTimer = 0f;
             }
+
+            if(btwAttackTimer > 0)
+            {
+                btwAttackTimer = 0f;
+            }
+        }
+
+        if(timerBeforeFirstAttack >= 1f)
+        {
+            timerBeforeFirstAttack = 0f;
         }
     }
 
@@ -69,5 +91,9 @@ public class AttackNorthWest : MonoBehaviour
     void OnTriggerExit2D()
     {
         playerIsInRange = false;
+
+        btwAttackTimer = 0f;
+
+        timerBeforeFirstAttack = 1f;
     }
 }

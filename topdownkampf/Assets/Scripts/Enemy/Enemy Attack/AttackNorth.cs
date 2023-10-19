@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class AttackNorth : MonoBehaviour
 {
@@ -10,6 +12,7 @@ public class AttackNorth : MonoBehaviour
 
     [SerializeField] float timeBtwAttack = 0.25f;
     [SerializeField] float btwAttackTimer = 0f;
+    [SerializeField] float timerBeforeFirstAttack = 0f;
 
     // Start is called before the first frame update
     void Start()
@@ -31,14 +34,25 @@ public class AttackNorth : MonoBehaviour
             enemyDetermineChildren.isAttackingSouth == false &&
 
             enemyDetermineChildren.isAttackingWest == false &&
-            enemyDetermineChildren.isAttackingEast == false
+            enemyDetermineChildren.isAttackingEast == false &&
+
+            timerBeforeFirstAttack >= 0f
         )
         
         {
             if(playerIsInRange)
             {
-                enemyDetermineChildren.attackRangeNorth.SetActive(true);
-                enemyDetermineChildren.isAttackingNorth = true;
+                timerBeforeFirstAttack += Time.deltaTime;
+                if(timerBeforeFirstAttack >= 1)
+                {
+                    enemyDetermineChildren.attackRangeNorth.SetActive(true);
+                    enemyDetermineChildren.isAttackingNorth = true;
+
+                    if(btwAttackTimer >= timeBtwAttack)
+                    {
+                        enemyDetermineChildren.attackRangeNorth.SetActive(false);
+                    }
+                }
             }
 
             if(enemyDetermineChildren.isAttackingNorth)
@@ -53,6 +67,16 @@ public class AttackNorth : MonoBehaviour
 
                 btwAttackTimer = 0f;
             }
+
+            if(btwAttackTimer > 0)
+            {
+                btwAttackTimer = 0f;
+            }
+        }
+
+        if(timerBeforeFirstAttack >= 1f)
+        {
+            timerBeforeFirstAttack = 0f;
         }
     }
 
@@ -67,5 +91,9 @@ public class AttackNorth : MonoBehaviour
     void OnTriggerExit2D()
     {
         playerIsInRange = false;
+
+        btwAttackTimer = 0f;
+
+        timerBeforeFirstAttack = 1f;
     }
 }

@@ -10,6 +10,7 @@ public class AttackSouth : MonoBehaviour
 
     [SerializeField] float timeBtwAttack = 0.25f;
     [SerializeField] float btwAttackTimer = 0f;
+    [SerializeField] float timerBeforeFirstAttack = 0f;
 
     // Start is called before the first frame update
     void Start()
@@ -31,14 +32,25 @@ public class AttackSouth : MonoBehaviour
             enemyDetermineChildren.isAttackingNorth == false &&
 
             enemyDetermineChildren.isAttackingWest == false &&
-            enemyDetermineChildren.isAttackingEast == false
+            enemyDetermineChildren.isAttackingEast == false &&
+
+            timerBeforeFirstAttack >= 0f
         )
 
         {
             if(playerIsInRange)
             {
-                enemyDetermineChildren.attackRangeSouth.SetActive(true);
-                enemyDetermineChildren.isAttackingSouth = true;
+                timerBeforeFirstAttack += Time.deltaTime;
+                if(timerBeforeFirstAttack >= 1)
+                {
+                    enemyDetermineChildren.attackRangeSouth.SetActive(true);
+                    enemyDetermineChildren.isAttackingSouth = true;
+
+                    if(btwAttackTimer >= timeBtwAttack)
+                    {
+                        enemyDetermineChildren.attackRangeSouth.SetActive(false);
+                    }
+                }
             }
 
             if(enemyDetermineChildren.isAttackingSouth)
@@ -53,6 +65,16 @@ public class AttackSouth : MonoBehaviour
 
                 btwAttackTimer = 0f;
             }
+
+            if(btwAttackTimer > 0)
+            {
+                btwAttackTimer = 0f;
+            }
+        }
+
+        if(timerBeforeFirstAttack >= 1f)
+        {
+            timerBeforeFirstAttack = 0f;
         }
     }
 
@@ -67,5 +89,9 @@ public class AttackSouth : MonoBehaviour
     void OnTriggerExit2D()
     {
         playerIsInRange = false;
+
+        btwAttackTimer = 0f;
+
+        timerBeforeFirstAttack = 1f;
     }  
 }

@@ -10,6 +10,7 @@ public class AttackNorthEast : MonoBehaviour
 
     [SerializeField] float timeBtwAttack = 0.25f;
     [SerializeField] float btwAttackTimer = 0f;
+    [SerializeField] float timerBeforeFirstAttack = 0f;
 
     // Start is called before the first frame update
     void Start()
@@ -31,14 +32,25 @@ public class AttackNorthEast : MonoBehaviour
             enemyDetermineChildren.isAttackingSouth == false &&
 
             enemyDetermineChildren.isAttackingWest == false &&
-            enemyDetermineChildren.isAttackingEast == false
+            enemyDetermineChildren.isAttackingEast == false &&
+
+            timerBeforeFirstAttack >= 0f
         )
 
         {
             if(playerIsInRange)
             {
-                enemyDetermineChildren.attackRangeNorthEast.SetActive(true);
-                enemyDetermineChildren.isAttackingNorthEast = true;
+                timerBeforeFirstAttack += Time.deltaTime;
+                if(timerBeforeFirstAttack >= 1)
+                {
+                    enemyDetermineChildren.attackRangeNorthEast.SetActive(true);
+                    enemyDetermineChildren.isAttackingNorthEast = true;
+
+                    if(btwAttackTimer >= timeBtwAttack)
+                    {
+                        enemyDetermineChildren.attackRangeNorthEast.SetActive(false);
+                    }
+                }
             }
 
             if(enemyDetermineChildren.isAttackingNorthEast)
@@ -51,6 +63,11 @@ public class AttackNorthEast : MonoBehaviour
                 enemyDetermineChildren.attackRangeNorthEast.SetActive(false);
                 enemyDetermineChildren.isAttackingNorthEast = false;
 
+                btwAttackTimer = 0f;
+            }
+
+            if(btwAttackTimer > 0)
+            {
                 btwAttackTimer = 0f;
             }
         }
@@ -67,5 +84,9 @@ public class AttackNorthEast : MonoBehaviour
     void OnTriggerExit2D()
     {
         playerIsInRange = false;
+
+        btwAttackTimer = 0f;
+
+        timerBeforeFirstAttack = 1f;
     }
 }

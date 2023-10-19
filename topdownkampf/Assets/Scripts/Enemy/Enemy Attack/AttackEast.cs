@@ -10,7 +10,7 @@ public class AttackEast : MonoBehaviour
 
     [SerializeField] float timeBtwAttack = 1f;
     [SerializeField] float btwAttackTimer = 0f;
-    [SerializeField] float timeBeforeFirstAttack = 1f;
+    [SerializeField] float timeBeforeFirstAttack = 0f;
 
     // Start is called before the first frame update
     void Start()
@@ -35,14 +35,23 @@ public class AttackEast : MonoBehaviour
             enemyDetermineChildren.isAttackingWest == false &&
 
 
-            timeBeforeFirstAttack == 0f
+            timeBeforeFirstAttack >= 0f
         )
         
         {
             if(playerIsInRange)
             {
-                enemyDetermineChildren.attackRangeEast.SetActive(true);
-                enemyDetermineChildren.isAttackingEast = true;
+                timeBeforeFirstAttack += Time.deltaTime;
+                if(timeBeforeFirstAttack >= 1)
+                {
+                    enemyDetermineChildren.attackRangeEast.SetActive(true);
+                    enemyDetermineChildren.isAttackingEast = true;
+
+                    if(btwAttackTimer >= timeBtwAttack)
+                    {
+                        enemyDetermineChildren.attackRangeEast.SetActive(false);
+                    }
+                }
             }
 
             if(enemyDetermineChildren.isAttackingEast)
@@ -57,6 +66,11 @@ public class AttackEast : MonoBehaviour
 
                 btwAttackTimer = 0f;
             }
+
+            if(btwAttackTimer > 0)
+            {
+                btwAttackTimer = 0f;
+            }
         }
     }
 
@@ -65,13 +79,15 @@ public class AttackEast : MonoBehaviour
         if(collision.CompareTag("Player"))
         {
             playerIsInRange = true;
-            
-            timeBeforeFirstAttack -= Time.deltaTime;
         }
     }
 
     void OnTriggerExit2D()
     {
         playerIsInRange = false;
+
+        btwAttackTimer = 0f;
+
+        timeBeforeFirstAttack = 1f;
     }
 }

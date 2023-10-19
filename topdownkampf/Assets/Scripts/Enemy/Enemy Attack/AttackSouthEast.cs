@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class AttackSouthEast : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class AttackSouthEast : MonoBehaviour
 
     [SerializeField] float timeBtwAttack = 0.25f;
     [SerializeField] float btwAttackTimer = 0f;
+    [SerializeField] float timerBeforeFirstAttack = 0f;
 
     // Start is called before the first frame update
     void Start()
@@ -31,14 +33,25 @@ public class AttackSouthEast : MonoBehaviour
             enemyDetermineChildren.isAttackingSouth == false &&
 
             enemyDetermineChildren.isAttackingWest == false &&
-            enemyDetermineChildren.isAttackingEast == false
+            enemyDetermineChildren.isAttackingEast == false &&
+
+            timerBeforeFirstAttack >= 0f
         )
 
         {
             if(playerIsInRange)
             {
-                enemyDetermineChildren.attackRangeSouthEast.SetActive(true);
-                enemyDetermineChildren.isAttackingSouthEast = true;
+                timerBeforeFirstAttack += Time.deltaTime;
+                if(timerBeforeFirstAttack >= 1)
+                {
+                    enemyDetermineChildren.attackRangeSouthEast.SetActive(true);
+                    enemyDetermineChildren.isAttackingSouthEast = true;
+
+                    if(btwAttackTimer >= timeBtwAttack)
+                    {
+                        enemyDetermineChildren.attackRangeSouthEast.SetActive(false);
+                    }
+                }
             }
 
             if(enemyDetermineChildren.isAttackingSouthEast)
@@ -53,6 +66,16 @@ public class AttackSouthEast : MonoBehaviour
 
                 btwAttackTimer = 0f;
             }
+
+            if(btwAttackTimer > 0)
+            {
+                btwAttackTimer = 0;
+            }
+        }
+
+        if(timerBeforeFirstAttack >= 1f)
+        {
+            timerBeforeFirstAttack = 0f;
         }
     }
 
@@ -67,5 +90,9 @@ public class AttackSouthEast : MonoBehaviour
     void OnTriggerExit2D()
     {
         playerIsInRange = false;
+
+        btwAttackTimer = 0f;
+
+        timerBeforeFirstAttack = 1f;
     }
 }
