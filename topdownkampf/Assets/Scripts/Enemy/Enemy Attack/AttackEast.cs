@@ -8,8 +8,9 @@ public class AttackEast : MonoBehaviour
 
     [SerializeField] bool playerIsInRange = false;
 
-    [SerializeField] float timeBtwAttack = 0.25f;
+    [SerializeField] float timeBtwAttack = 1f;
     [SerializeField] float btwAttackTimer = 0f;
+    [SerializeField] float timeBeforeFirstAttack = 1f;
 
     // Start is called before the first frame update
     void Start()
@@ -31,7 +32,10 @@ public class AttackEast : MonoBehaviour
             enemyDetermineChildren.isAttackingNorth == false &&
             enemyDetermineChildren.isAttackingSouth == false &&
 
-            enemyDetermineChildren.isAttackingWest == false
+            enemyDetermineChildren.isAttackingWest == false &&
+
+
+            timeBeforeFirstAttack == 0f
         )
         
         {
@@ -61,6 +65,8 @@ public class AttackEast : MonoBehaviour
         if(collision.CompareTag("Player"))
         {
             playerIsInRange = true;
+            
+            timeBeforeFirstAttack -= Time.deltaTime;
         }
     }
 

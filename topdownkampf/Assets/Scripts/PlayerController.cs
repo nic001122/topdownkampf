@@ -19,10 +19,11 @@ public class PlayerController : MonoBehaviour
 
 
     public MovementScript movementScript;
+    public EnemyHealth enemyHealth;
 
     public bool isAttacking = false;
 
-    private float timeToAttack = 0.25f;
+    [SerializeField] private float timeToAttack = 1f;
     [SerializeField] private float timer = 0f;
 
     public void Start()
@@ -43,6 +44,7 @@ public class PlayerController : MonoBehaviour
 
             if(timer >= timeToAttack)
             {
+                enemyHealth.enemyTookDmg = false;
                 isAttacking = false;
                 timer = 0;
 

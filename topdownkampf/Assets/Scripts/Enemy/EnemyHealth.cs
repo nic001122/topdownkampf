@@ -4,21 +4,26 @@ using UnityEngine;
 
 public class EnemyHealth : MonoBehaviour
 {
+    public bool enemyTookDmg = false;
     
     public float damage = 2;
     public float enemyHealth = 4f;
     public void Update()
     {
-        if(enemyHealth == 0)
+        if(enemyHealth <= 0f)
         {
             Destroy(gameObject);
         }
     }
     private void OnTriggerEnter2D(Collider2D collider)
     {
-        if(collider.gameObject.CompareTag("AttackRange"))
+        if(!enemyTookDmg)
         {
-            enemyHealth -= damage;
+            if(collider.gameObject.CompareTag("AttackRange"))
+            {
+                enemyHealth -= damage;
+                enemyTookDmg = true;
+            }
         }
     }
 }

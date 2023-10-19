@@ -10,6 +10,7 @@ public class AttackWest : MonoBehaviour
 
     [SerializeField] float timeBtwAttack = 0.25f;
     [SerializeField] float btwAttackTimer = 0f;
+    [SerializeField] float timeBeforeFirstAttack = 1f;
 
     // Start is called before the first frame update
     void Start()
@@ -31,7 +32,9 @@ public class AttackWest : MonoBehaviour
             enemyDetermineChildren.isAttackingNorth == false &&
             enemyDetermineChildren.isAttackingSouth == false &&
 
-            enemyDetermineChildren.isAttackingEast == false
+            enemyDetermineChildren.isAttackingEast == false &&
+
+            timeBeforeFirstAttack >= 0f
         )
         
         {
@@ -58,6 +61,16 @@ public class AttackWest : MonoBehaviour
 
                 btwAttackTimer = 0f;
             }
+
+            if(btwAttackTimer > 0)
+            {
+                btwAttackTimer = 0f;
+            }
+
+            if(timeBeforeFirstAttack <= 0f)
+            {
+                timeBeforeFirstAttack = 1f;
+            }
         }
     }
 
@@ -72,5 +85,17 @@ public class AttackWest : MonoBehaviour
     void OnTriggerExit2D()
     {
         playerIsInRange = false;
+
+        btwAttackTimer = 0f;
+
+        timeBeforeFirstAttack = 1f;
+    }
+
+    void OnTriggerStay2D(Collider2D collision)
+    {
+        if(collision.CompareTag("Player"))
+        {
+            timeBeforeFirstAttack -= Time.deltaTime;
+        }
     }
 }
