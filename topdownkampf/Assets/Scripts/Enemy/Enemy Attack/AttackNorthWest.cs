@@ -9,7 +9,6 @@ public class AttackNorthWest : MonoBehaviour
     public EnemyDetermineChildren enemyDetermineChildren;
 
     [SerializeField] bool playerIsInRange = false;
-    [SerializeField] bool isAttacking = false;
 
     [SerializeField] float timeBtwAttack = 0.25f;
     [SerializeField] float btwAttackTimer = 0f;
@@ -23,24 +22,39 @@ public class AttackNorthWest : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(playerIsInRange)
-        {
-            enemyDetermineChildren.attackRangeNorthWest.SetActive(true);
-            isAttacking = true;
-        }
+        if
+        (
+            enemyDetermineChildren.isAttackingNorthEast == false &&
+            
+            enemyDetermineChildren.isAttackingSouthWest == false &&
+            enemyDetermineChildren.isAttackingSouthEast == false &&
 
-        if(isAttacking)
-        {
-            btwAttackTimer += Time.deltaTime;
-        }
+            enemyDetermineChildren.isAttackingNorth == false &&
+            enemyDetermineChildren.isAttackingSouth == false &&
 
-        if(btwAttackTimer >= timeBtwAttack)
+            enemyDetermineChildren.isAttackingWest == false &&
+            enemyDetermineChildren.isAttackingEast == false
+        )
+        
         {
-            enemyDetermineChildren.attackRangeNorthWest.SetActive(false);
-            isAttacking = false;
+            if(playerIsInRange)
+            {
+                enemyDetermineChildren.attackRangeNorthWest.SetActive(true);
+                enemyDetermineChildren.isAttackingNorthWest = true;
+            }
 
-            btwAttackTimer = 0f;
-            Debug.Log("Attacked");
+            if(enemyDetermineChildren.isAttackingNorthWest)
+            {
+                btwAttackTimer += Time.deltaTime;
+            }
+
+            if(btwAttackTimer >= timeBtwAttack)
+            {
+                enemyDetermineChildren.attackRangeNorthWest.SetActive(false);
+                enemyDetermineChildren.isAttackingNorthWest = false;
+
+                btwAttackTimer = 0f;
+            }
         }
     }
 

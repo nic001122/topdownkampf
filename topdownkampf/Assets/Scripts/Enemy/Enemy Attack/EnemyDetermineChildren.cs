@@ -4,30 +4,37 @@ using UnityEngine;
 
 public class EnemyDetermineChildren : MonoBehaviour
 {
-
     public GameObject attackRangeNorthWest;
     public GameObject attackScanNorthWest;
+    public bool isAttackingNorthWest = false;
 
     public GameObject attackRangeNorthEast;
     public GameObject attackScanNorthEast;
+    public bool isAttackingNorthEast = false;
 
     public GameObject attackRangeNorth;
     public GameObject attackScanNorth;
+    public bool isAttackingNorth = false;
 
     public GameObject attackRangeSouthWest;
     public GameObject attackScanSouthWest;
+    public bool isAttackingSouthWest = false;
 
     public GameObject attackRangeSouthEast;
     public GameObject attackScanSouthEast;
+    public bool isAttackingSouthEast = false;
 
     public GameObject attackRangeSouth;
     public GameObject attackScanSouth;
+    public bool isAttackingSouth = false;
 
     public GameObject attackRangeWest;
     public GameObject attackScanWest;
+    public bool isAttackingWest = false;
 
     public GameObject attackRangeEast;
     public GameObject attackScanEast;
+    public bool isAttackingEast = false;
 
 
     public GameObject attackRangeEmpty;
