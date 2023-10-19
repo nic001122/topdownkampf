@@ -2130,7 +2130,7 @@ MonoBehaviour:
   playerIsInRange: 0
   timeBtwAttack: 1
   btwAttackTimer: 0
-  timeBeforeFirstAttack: 1
+  timerBeforeFirstAttack: 0
 --- !u!60 &1145489916
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -3848,7 +3848,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   followSpeed: 3
   stoppingDistance: 5
-  retreatDistance: 1.75
+  retreatDistance: 1
 --- !u!114 &1980115018
 MonoBehaviour:
   m_ObjectHideFlags: 0
