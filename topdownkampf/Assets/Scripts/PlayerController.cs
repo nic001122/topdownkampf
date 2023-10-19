@@ -19,8 +19,6 @@ public class PlayerController : MonoBehaviour
 
 
     public MovementScript movementScript;
-    
-    public Health health;
 
     public bool isAttacking = false;
 

@@ -6,14 +6,7 @@ TagManager:
   tags:
   - AttackRange
   - Enemy
-  - Enemy Attack Range NorthWest
-  - Enemy Attack Range NorthEast
-  - Enemy Attack Range SouthWest
-  - Enemy Attack Range SouthEast
-  - Enemy Attack Range North
-  - Enemy Attack Range South
-  - Enemy Attack Range West
-  - Enemy Attack Range East
+  - Enemy Attack Range
   layers:
   - Default
   - TransparentFX

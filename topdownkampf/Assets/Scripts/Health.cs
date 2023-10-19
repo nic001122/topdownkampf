@@ -10,17 +10,8 @@ public class Health : MonoBehaviour
     public float maxHealth = 10;
     public float currentHealth;
 
-
-    public bool enemyIsAttackingNorth;
-    public bool enemyIsAttackingNorthEast;
-    public bool enemyIsAttackingNorthWest;
-
-    public bool enemyIsAttackingSouth;
-    public bool enemyIsAttackingSouthEast;
-    public bool enemyIsAttackingSouthWest;
-
-    public bool enemyIsAttackingEast;
-    public bool enemyIsAttackingWest;
+    [SerializeField] float timeBtwAttack = 1f;
+    [SerializeField] float btwAttackTimer = 0f;
 
     // Start is called before the first frame update
     void Start()
@@ -48,124 +39,27 @@ public class Health : MonoBehaviour
 
     public void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.CompareTag("Enemy Attack Range NorthWest"))
+        if(collision.CompareTag("Enemy Attack Range"))
         {
-            enemyIsAttackingEast = false;
-            enemyIsAttackingNorth = false;
-            enemyIsAttackingNorthEast = false;
-            enemyIsAttackingSouth = false;
-            enemyIsAttackingSouthEast = false;
-            enemyIsAttackingSouthWest = false;
-            enemyIsAttackingWest = false;
-
-            enemyIsAttackingNorthWest = true;
-
-            currentHealth -= 2;
+            currentHealth -= 2.5f;
         }
+    }
 
-        if(collision.CompareTag("Enemy Attack Range NorthEast"))
+    public void OnTriggerStay2D(Collider2D collision)
+    {
+        if(collision.CompareTag("Enemy Attack Range"))
         {
-            enemyIsAttackingEast = false;
-            enemyIsAttackingNorth = false;
-            enemyIsAttackingNorthWest = false;
-            enemyIsAttackingSouth = false;
-            enemyIsAttackingSouthEast = false;
-            enemyIsAttackingSouthWest = false;
-            enemyIsAttackingWest = false;
-
-            enemyIsAttackingNorthEast = true;
-
-            currentHealth -= 2;
+            btwAttackTimer += Time.deltaTime;
+            if(btwAttackTimer >= timeBtwAttack)
+            {
+                currentHealth -= 2.5f;
+                btwAttackTimer = 0f;
+            }
         }
+    }
 
-        if(collision.CompareTag("Enemy Attack Range SouthWest"))
-        {
-            enemyIsAttackingEast = false;
-            enemyIsAttackingNorth = false;
-            enemyIsAttackingNorthEast = false;
-            enemyIsAttackingNorthWest = false;
-            enemyIsAttackingSouth = false;
-            enemyIsAttackingSouthEast = false;
-            enemyIsAttackingWest = false;
-
-            enemyIsAttackingSouthWest = true;
-
-            currentHealth -= 2;
-        }
-
-        if(collision.CompareTag("Enemy Attack Range SouthEast"))
-        {
-            enemyIsAttackingEast = false;
-            enemyIsAttackingNorth = false;
-            enemyIsAttackingNorthEast = false;
-            enemyIsAttackingNorthWest = false;
-            enemyIsAttackingSouth = false;
-            enemyIsAttackingSouthWest = false;
-            enemyIsAttackingWest = false;
-
-            enemyIsAttackingSouthEast = true;
-
-            currentHealth -= 2;
-        }
-
-        if(collision.CompareTag("Enemy Attack Range North"))
-        {
-            enemyIsAttackingEast = false;
-            enemyIsAttackingNorthEast = false;
-            enemyIsAttackingNorthWest = false;
-            enemyIsAttackingSouth = false;
-            enemyIsAttackingSouthEast = false;
-            enemyIsAttackingSouthWest = false;
-            enemyIsAttackingWest = false;
-
-            enemyIsAttackingNorth = true;
-
-            currentHealth -= 2;
-        }
-
-        if(collision.CompareTag("Enemy Attack Range South"))
-        {
-            enemyIsAttackingEast = false;
-            enemyIsAttackingNorth = false;
-            enemyIsAttackingNorthEast = false;
-            enemyIsAttackingNorthWest = false;
-            enemyIsAttackingSouthEast = false;
-            enemyIsAttackingSouthWest = false;
-            enemyIsAttackingWest = false;
-
-            enemyIsAttackingSouth = true;
-
-            currentHealth -= 2;
-        }
-
-        if(collision.CompareTag("Enemy Attack Range West"))
-        {
-            enemyIsAttackingEast = false;
-            enemyIsAttackingNorth = false;
-            enemyIsAttackingNorthEast = false;
-            enemyIsAttackingNorthWest = false;
-            enemyIsAttackingSouth = false;
-            enemyIsAttackingSouthEast = false;
-            enemyIsAttackingSouthWest = false;
-
-            enemyIsAttackingWest = true;
-
-            currentHealth -= 2;
-        }
-
-        if(collision.CompareTag("Enemy Attack Range East"))
-        {
-            enemyIsAttackingNorth = false;
-            enemyIsAttackingNorthEast = false;
-            enemyIsAttackingNorthWest = false;
-            enemyIsAttackingSouth = false;
-            enemyIsAttackingSouthEast = false;
-            enemyIsAttackingSouthWest = false;
-            enemyIsAttackingWest = false;
-
-            enemyIsAttackingEast = true;
-
-            currentHealth -= 2;
-        }
+    public void OnTriggerExit2D()
+    {
+        btwAttackTimer = 0f;
     }
 }

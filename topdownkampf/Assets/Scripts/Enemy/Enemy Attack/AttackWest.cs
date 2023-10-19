@@ -39,6 +39,11 @@ public class AttackWest : MonoBehaviour
             {
                 enemyDetermineChildren.attackRangeWest.SetActive(true);
                 enemyDetermineChildren.isAttackingWest = true;
+
+                if(btwAttackTimer >= timeBtwAttack)
+                {
+                    enemyDetermineChildren.attackRangeWest.SetActive(false);
+                }
             }
 
             if(enemyDetermineChildren.isAttackingWest)
