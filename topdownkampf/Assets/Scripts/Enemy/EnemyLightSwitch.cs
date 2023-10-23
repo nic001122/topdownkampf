@@ -20,9 +20,11 @@ public class EnemyLightSwitch : MonoBehaviour
         switch (lightStatus)
         {
             case true:
-                lantern.intensity = 0; break;
+                lantern.intensity = 0;
+                lightStatus = false;  break;
             default:
-                lantern.intensity = 1; break;
+                lantern.intensity = 1;
+                lightStatus = true; break;
         }
     }
 }
