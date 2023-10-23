@@ -8,7 +8,7 @@ public class LightBattery : MonoBehaviour
 {
     [SerializeField] Slider lightBatterySlider;
     public Light2D lantern;
-    bool lightStatus = false;
+    //bool lightStatus = false;
     public float currentValueLight;
     public float maxValueLight = 20;
     public float lanternIntensity;
@@ -32,6 +32,12 @@ public class LightBattery : MonoBehaviour
                 currentValueLight -= Time.deltaTime; break;
             case 0:
                 currentValueLight += Time.deltaTime; break;
+        }
+        if (lightBatterySlider.value == 0)
+        {
+            lantern.intensity = 0;
+            currentValueLight += Time.deltaTime;
+
         }
     }
 }
