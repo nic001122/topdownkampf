@@ -10,7 +10,7 @@ public class LightBattery : MonoBehaviour
     public Light2D lantern;
     bool lightStatus = false;
     public float currentValueLight;
-    public float maxValueLight = 50;
+    public float maxValueLight = 20;
     public float lanternIntensity;
     
 
