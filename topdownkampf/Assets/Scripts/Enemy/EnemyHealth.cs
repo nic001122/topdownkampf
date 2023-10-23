@@ -5,6 +5,8 @@ using UnityEngine;
 public class EnemyHealth : MonoBehaviour
 {
     public bool enemyTookDmg = false;
+    public float timeToTakeDmgAgain = 0.25f;
+    public float timer = 0f;
     
     public float damage = 2;
     public float enemyHealth = 4f;
@@ -13,6 +15,18 @@ public class EnemyHealth : MonoBehaviour
         if(enemyHealth <= 0f)
         {
             Destroy(gameObject);
+        }
+
+        
+        if(enemyTookDmg)
+        {
+            timer += Time.deltaTime;
+
+            if(timer >= timeToTakeDmgAgain)
+            {
+                enemyTookDmg = false;
+                timer = 0f;
+            }
         }
     }
     private void OnTriggerEnter2D(Collider2D collider)

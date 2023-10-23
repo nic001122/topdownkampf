@@ -21,6 +21,32 @@ public class AttackWest : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
+        if(timerBeforeFirstAttack >= 1f)
+        {
+            timerBeforeFirstAttack = 0f;
+        }
+    }
+
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.CompareTag("Player"))
+        {
+            playerIsInRange = true;
+        }
+    }
+
+    void OnTriggerExit2D()
+    {
+        playerIsInRange = false;
+
+        btwAttackTimer = 0f;
+
+        timerBeforeFirstAttack = 1f;
+    }
+
+    void OnTriggerStay2D()
+    {
         if
         (
             enemyDetermineChildren.isAttackingNorthWest == false &&
@@ -76,22 +102,5 @@ public class AttackWest : MonoBehaviour
         {
             timerBeforeFirstAttack = 0f;
         }
-    }
-
-    void OnTriggerEnter2D(Collider2D collision)
-    {
-        if(collision.CompareTag("Player"))
-        {
-            playerIsInRange = true;
-        }
-    }
-
-    void OnTriggerExit2D()
-    {
-        playerIsInRange = false;
-
-        btwAttackTimer = 0f;
-
-        timerBeforeFirstAttack = 1f;
     }
 }
