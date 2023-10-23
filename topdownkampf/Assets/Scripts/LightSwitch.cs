@@ -6,7 +6,7 @@ using UnityEngine.Rendering.Universal;
 public class LightSwitch : MonoBehaviour
 {
     public Light2D lantern;
-    bool lightStatus = false;
+    public bool lightStatus = true;
 
     // Start is called before the first frame update
     void Start()

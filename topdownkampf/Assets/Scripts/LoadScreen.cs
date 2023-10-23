@@ -23,7 +23,7 @@ public class LoadScreen : MonoBehaviour
 
         loadSlider.value = loadingTimer;
 
-        if (loadSlider.value == 10f)
+        if (loadSlider.value == 3f)
         {
             SceneManager.LoadScene(1);
         }

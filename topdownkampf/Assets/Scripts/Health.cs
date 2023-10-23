@@ -9,6 +9,7 @@ public class Health : MonoBehaviour
 
     public float maxHealth = 10;
     public float currentHealth;
+    
 
     [SerializeField] float timeBtwAttack = 1f;
     [SerializeField] float btwAttackTimer = 0f;
