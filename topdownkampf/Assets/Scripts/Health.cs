@@ -25,17 +25,10 @@ public class Health : MonoBehaviour
     {
         healthBar.value = currentHealth;
 
-
         if (Input.GetKeyDown(KeyCode.E))
         {
             currentHealth = currentHealth - 2;
         }
-        if (currentHealth <= 0)
-        {
-            
-            Destroy(gameObject, 0.1f);
-        }
-
     }
 
     public void OnTriggerEnter2D(Collider2D collision)
