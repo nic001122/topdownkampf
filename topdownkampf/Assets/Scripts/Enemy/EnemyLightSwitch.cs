@@ -26,5 +26,5 @@ public class EnemyLightSwitch : MonoBehaviour
                 lantern.intensity = 1;
                 lightStatus = true; break;
         }
-    }
+    } 
 }

@@ -11,4 +11,24 @@ public class InteractRange : MonoBehaviour
         Destroy(gameObject);
         redRune.SetActive(true);
     }
+    public void pickUpRune2()
+    {
+        Destroy(gameObject);
+        redRune.SetActive(true);
+    }
+    public void pickUpRune3()
+    {
+        Destroy(gameObject);
+        redRune.SetActive(true);
+    }
+    public void pickUpRune4()
+    {
+        Destroy(gameObject);
+        redRune.SetActive(true);
+    }
+    public void pickUpRune5()
+    {
+        Destroy(gameObject);
+        redRune.SetActive(true);
+    }
 }
