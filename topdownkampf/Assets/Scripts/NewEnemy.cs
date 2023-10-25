@@ -2,10 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Rendering.Universal;
 
 public class NewEnemy : MonoBehaviour
 {
     [SerializeField] Transform target;
+    public Light2D playerLantern;
 
     NavMeshAgent agent;
     private void Start()
@@ -17,6 +19,10 @@ public class NewEnemy : MonoBehaviour
 
     private void Update()
     {
-        agent.SetDestination(target.position);
+        if (playerLantern.intensity == 0)
+        {
+            agent.SetDestination(target.position);
+        }
+        
     }
 }
