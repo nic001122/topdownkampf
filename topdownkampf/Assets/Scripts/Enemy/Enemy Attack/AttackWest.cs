@@ -6,7 +6,6 @@ public class AttackWest : MonoBehaviour
 {
     public EnemyDetermineChildren enemyDetermineChildren;
 
-
     [SerializeField] bool playerIsInRange = false;
 
     [SerializeField] float timeBtwAttack = 0.25f;

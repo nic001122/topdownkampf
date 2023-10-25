@@ -34,6 +34,8 @@ public class PauseMenu : MonoBehaviour
             if(Input.GetKeyDown(KeyCode.Escape))
             {
                 menus.SetActive(false);
+                settingsMenu.settingsMenu.SetActive(false);
+                pauseMenu.SetActive(true);
                 gameIsPaused = false;
                 Time.timeScale = 1f;
             }
