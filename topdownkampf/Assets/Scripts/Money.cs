@@ -3,16 +3,25 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class Money : MonoBehaviour
+public class Money : MonoBehaviour 
 {
-    private TMP_Text moneyCount;
-    public int moneyAmount;
-    // Start is called before the first frame update
-    void Start()
-    {
-        moneyCount.text = "0";
-    }
+    public int moneyCount;
+    public TMP_Text moneyText;
+    public int randomNumber;
 
-    // Update is called once per frame
-    
+    private void Start()
+    {
+        moneyCount = 0;
+        int randomNumber = Random.Range(9, 19);
+    }
+    private void Update()
+    {
+        string moneyString = moneyCount.ToString();
+
+        moneyText.text = (moneyString);
+    }
+    public void addMoney()
+    {
+        moneyCount = moneyCount + randomNumber;
+    }
 }

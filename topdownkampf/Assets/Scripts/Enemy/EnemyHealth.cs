@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class EnemyHealth : MonoBehaviour
 {
@@ -10,11 +11,18 @@ public class EnemyHealth : MonoBehaviour
     
     public float damage = 2;
     public float enemyHealth = 4f;
+
+    public Money moneyScript;
+
+    
     public void Update()
+
     {
+        
         if(enemyHealth <= 0f)
         {
             Destroy(gameObject);
+            moneyScript.addMoney();
         }
 
         
