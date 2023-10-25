@@ -9,11 +9,14 @@ public class EnemyHealth : MonoBehaviour
     public float timeToTakeDmgAgain = 0.25f;
     public float timer = 0f;
     
-    public float damage = 2;
     public float enemyHealth = 4f;
 
     public Money moneyScript;
+    
+    public Health health;
 
+    public ParticleSystem enemyDamage;
+    public float timeToEnemyDestruction;
     
     public void Update()
 
@@ -21,7 +24,8 @@ public class EnemyHealth : MonoBehaviour
         
         if(enemyHealth <= 0f)
         {
-            Destroy(gameObject);
+            Destroy(gameObject, timeToEnemyDestruction);
+            enemyDamage.Play();
             moneyScript.addMoney();
         }
 
@@ -43,7 +47,8 @@ public class EnemyHealth : MonoBehaviour
         {
             if(collider.gameObject.CompareTag("AttackRange"))
             {
-                enemyHealth -= damage;
+                enemyHealth -= health.playerAttackDamage;
+                enemyDamage.Play();
                 enemyTookDmg = true;
             }
         }
