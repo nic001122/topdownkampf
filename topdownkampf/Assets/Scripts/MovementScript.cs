@@ -40,6 +40,7 @@ public class MovementScript : MonoBehaviour
     public float dashSpeed = 20f;
     public float dashTimer;
     public float endDashTimer = .5f;
+    public TrailRenderer dashTrail;
 
     public Stamina stamina;
 
@@ -58,6 +59,7 @@ public class MovementScript : MonoBehaviour
             if(!isDashing && !stamina.staminaIsRefilling && stamina.currentStamina >= 2)
             {
                 isDashing = true;
+                dashTrail.emitting = true;
                 stamina.currentStamina -= 2;
                 stamina.staminaIsBeingUsed = true;
 
@@ -113,6 +115,7 @@ public class MovementScript : MonoBehaviour
                     stamina.staminaIsBeingUsed = false;
                     dashTimer = 0f;
                     isDashing = false;
+                    dashTrail.emitting = false;
                 }
 
                 rb.velocity = new Vector2(0, 0);
