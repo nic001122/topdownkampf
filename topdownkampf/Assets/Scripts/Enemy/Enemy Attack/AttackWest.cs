@@ -6,11 +6,15 @@ public class AttackWest : MonoBehaviour
 {
     public EnemyDetermineChildren enemyDetermineChildren;
 
+
     [SerializeField] bool playerIsInRange = false;
 
     [SerializeField] float timeBtwAttack = 0.25f;
     [SerializeField] float btwAttackTimer = 0f;
     [SerializeField] float timerBeforeFirstAttack = 0f;
+
+
+    public NewEnemy newEnemy;
 
     // Start is called before the first frame update
     void Start()
@@ -21,7 +25,11 @@ public class AttackWest : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if(newEnemy.playerLantern.intensity > 0)
+        {
+            return;
+        }
+
         if(timerBeforeFirstAttack >= 1f)
         {
             timerBeforeFirstAttack = 0f;
@@ -30,6 +38,11 @@ public class AttackWest : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
+        if(newEnemy.playerLantern.intensity > 0)
+        {
+            return;
+        }
+
         if(collision.CompareTag("Player"))
         {
             playerIsInRange = true;
@@ -47,6 +60,11 @@ public class AttackWest : MonoBehaviour
 
     void OnTriggerStay2D()
     {
+        if(newEnemy.playerLantern.intensity > 0)
+        {
+            return;
+        }
+
         if
         (
             enemyDetermineChildren.isAttackingNorthWest == false &&

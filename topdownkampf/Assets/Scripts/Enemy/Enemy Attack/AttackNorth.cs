@@ -14,6 +14,9 @@ public class AttackNorth : MonoBehaviour
     [SerializeField] float btwAttackTimer = 0f;
     [SerializeField] float timerBeforeFirstAttack = 0f;
 
+
+    public NewEnemy newEnemy;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -23,6 +26,11 @@ public class AttackNorth : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(newEnemy.playerLantern.intensity > 0)
+        {
+            return;
+        }
+
         if
         (
             enemyDetermineChildren.isAttackingNorthWest == false &&
@@ -82,6 +90,11 @@ public class AttackNorth : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
+        if(newEnemy.playerLantern.intensity > 0)
+        {
+            return;
+        }
+
         if(collision.CompareTag("Player"))
         {
             playerIsInRange = true;
