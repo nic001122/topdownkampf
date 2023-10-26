@@ -5,6 +5,8 @@ using TMPro;
 
 public class EnemyHealth : MonoBehaviour
 {
+    public SFX SFXScript;
+
     public bool enemyTookDmg = false;
     public float timeToTakeDmgAgain = 0.25f;
     public float timer = 0f;
@@ -26,7 +28,10 @@ public class EnemyHealth : MonoBehaviour
         {
             Destroy(gameObject, timeToEnemyDestruction);
             enemyDamage.Play();
+            Debug.Log(moneyScript.moneyCount);
             moneyScript.addMoney();
+            SFXScript.EnemyDeathSound();
+
         }
 
         

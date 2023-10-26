@@ -30,13 +30,13 @@ public class LightBattery : MonoBehaviour
         {
             case 1:
                 currentValueLight -= Time.deltaTime; break;
-            case 0:
-                currentValueLight += Time.deltaTime; break;
+            //case 0:
+                //currentValueLight += Time.deltaTime; break;
         }
         if (lightBatterySlider.value == 0)
         {
             lantern.intensity = 0;
-            currentValueLight += Time.deltaTime;
+            //currentValueLight += Time.deltaTime;
 
         }
     }

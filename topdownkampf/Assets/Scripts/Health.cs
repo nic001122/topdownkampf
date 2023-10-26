@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class Health : MonoBehaviour
 {
+    public SFX SFXScript;
+
     public ParticleSystem playerDamage;
 
     [SerializeField] Slider healthBar;

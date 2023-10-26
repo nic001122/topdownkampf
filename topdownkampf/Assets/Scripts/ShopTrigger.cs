@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class ShopTrigger : MonoBehaviour
 {
+    public SFX SFXScript;
+
     public bool inGoodRange = false;
 
     public GameObject ShopPanel;
@@ -24,6 +26,8 @@ public class ShopTrigger : MonoBehaviour
             {
                 ShopPanel.SetActive(true);
                 ShopButtons.SetActive(true);
+                SFXScript.ShopSound();
+
             }
         }
     }

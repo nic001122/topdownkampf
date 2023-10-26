@@ -7,6 +7,8 @@ using UnityEngine.InputSystem;
 
 public class MovementScript : MonoBehaviour
 {
+    public SFX SFXScript;
+
     public float moveSpeed;
     public Rigidbody2D rb;
     public float forceNum = 3;
@@ -66,41 +68,49 @@ public class MovementScript : MonoBehaviour
                 if(lookingEast)
                 {
                     rb.velocity = new Vector2(-transform.localScale.x * dashSpeed, 0f);
+                    SFXScript.DashSound();
                 }
 
                 if(lookingWest)
                 {
                     rb.velocity = new Vector2(-transform.localScale.x * dashSpeed, 0f);
+                    SFXScript.DashSound();
                 }
 
                 if(lookingNorth)
                 {
                     rb.velocity = new Vector2(0, transform.localScale.y * dashSpeed);
+                    SFXScript.DashSound();
                 }
 
                 if(lookingSouth)
                 {
                     rb.velocity = new Vector2(0, -transform.localScale.y * dashSpeed);
+                    SFXScript.DashSound();
                 }
 
                 if(lookingNorthWest)
                 {
                     rb.velocity = new Vector2(transform.localScale.x * dashSpeed, transform.localScale.y * dashSpeed);
+                    SFXScript.DashSound();
                 }
 
                 if(lookingNorthEast)
                 {
                     rb.velocity = new Vector2(transform.localScale.x * dashSpeed, transform.localScale.y * dashSpeed);
+                    SFXScript.DashSound();
                 }
 
                 if(lookingSouthWest)
                 {
                     rb.velocity = new Vector2(transform.localScale.x * dashSpeed, -transform.localScale.y * dashSpeed);
+                    SFXScript.DashSound();
                 }
 
                 if(lookingSouthEast)
                 {
                     rb.velocity = new Vector2(transform.localScale.x * dashSpeed, -transform.localScale.y * dashSpeed);
+                    SFXScript.DashSound();
                 }
             }
         }
