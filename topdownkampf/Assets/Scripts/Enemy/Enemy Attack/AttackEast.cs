@@ -84,10 +84,7 @@ public class AttackEast : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if(newEnemy.playerLantern.intensity > 0)
-        {
-            return;
-        }
+        
 
         if(collision.CompareTag("Player"))
         {

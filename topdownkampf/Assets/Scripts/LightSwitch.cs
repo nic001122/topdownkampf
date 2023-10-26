@@ -48,9 +48,12 @@ public class LightSwitch : MonoBehaviour
         }
         if (MiniGameLantern == true && game1.value == 1 && game2.value == 1 && game3.value == 1)
         {
+            lightStatus = false;
+            lantern.intensity = 1;
             MiniGameLantern.SetActive(false);
             lanternSlider.value = 25;
             warningText.SetActive(false);
+            Debug.Log(lanternSlider.value);
         }
 
         switch (lightStatus)

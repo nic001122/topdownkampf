@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class DeathScreen : MonoBehaviour
 {
+    public SFX SFXScript;
+
     public GameObject deathScreen;
     public Health health;
 
@@ -15,6 +17,7 @@ public class DeathScreen : MonoBehaviour
         {
             deathScreen.SetActive(true);
             gameObject.SetActive(false);
+            SFXScript.PlayerDeathSound();
         }
     }
 

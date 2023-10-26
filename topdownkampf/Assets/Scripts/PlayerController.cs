@@ -5,6 +5,9 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    public SFX SFXScript;
+
+
     public GameObject attackRangeNorth = default;
     public GameObject attackRangeSouth = default;
 
@@ -36,6 +39,7 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
             attack();
+            SFXScript.SlashSound();
         }
 
         if (isAttacking)

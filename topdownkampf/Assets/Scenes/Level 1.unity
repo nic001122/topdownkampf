@@ -901,6 +901,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b23703ad0fee09b4a870867bc9f308f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SFXScript: {fileID: 1501949796}
   attackRangeNorth: {fileID: 1635675448}
   attackRangeSouth: {fileID: 253251185}
   attackRangeEast: {fileID: 1374747817}
@@ -1014,6 +1015,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c19cd446fbfd31841916b4e6da0a14f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SFXScript: {fileID: 1501949796}
   deathScreen: {fileID: 234497987}
   health: {fileID: 69565995}
 --- !u!1 &71082275
@@ -2270,7 +2272,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &245633535
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6331,7 +6333,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.25
+      scalar: 0.18
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -6384,7 +6386,7 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 5
+      scalar: 2
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -6437,8 +6439,8 @@ ParticleSystem:
     startColor:
       serializedVersion: 2
       minMaxState: 2
-      minColor: {r: 1, g: 0.37494263, b: 0.1830188, a: 1}
-      maxColor: {r: 1, g: 0, b: 0, a: 1}
+      minColor: {r: 0.9245283, g: 0.22386368, b: 0.2544869, a: 1}
+      maxColor: {r: 0.5566038, g: 0.06126136, b: 0.06126136, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -6500,8 +6502,8 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 0.5
-      minScalar: 0.4
+      scalar: 0.2
+      minScalar: 0.09
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -6816,7 +6818,7 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     randomizeRotationDirection: 0
-    maxNumParticles: 1000
+    maxNumParticles: 100
     customEmitterVelocity: {x: 0, y: 0, z: 0}
     size3D: 0
     rotation3D: 0
@@ -11239,7 +11241,7 @@ MonoBehaviour:
   timeToTakeDmgAgain: 0.25
   timer: 0
   enemyHealth: 4
-  moneyScript: {fileID: 0}
+  moneyScript: {fileID: 1205866681}
   health: {fileID: 69565995}
   enemyDamage: {fileID: 1880136808}
   timeToEnemyDestruction: 0
@@ -11611,7 +11613,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &825571951
 RectTransform:
   m_ObjectHideFlags: 0
@@ -12440,6 +12442,7 @@ MonoBehaviour:
   moneyCount: 0
   moneyText: {fileID: 0}
   randomNumber: 0
+  updatedMoney: 0
 --- !u!114 &953797766
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13808,7 +13811,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1137705665
 RectTransform:
   m_ObjectHideFlags: 0
@@ -14908,6 +14911,7 @@ MonoBehaviour:
   moneyCount: 0
   moneyText: {fileID: 1205866679}
   randomNumber: 0
+  updatedMoney: 0
 --- !u!1 &1208177856
 GameObject:
   m_ObjectHideFlags: 0
@@ -15119,6 +15123,7 @@ MonoBehaviour:
   moneyCount: 0
   moneyText: {fileID: 0}
   randomNumber: 0
+  updatedMoney: 0
 --- !u!114 &1218844559
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16260,7 +16265,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 10
   m_WholeNumbers: 0
-  m_Value: 0
+  m_Value: 10
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -18490,6 +18495,7 @@ MonoBehaviour:
   moneyCount: 0
   moneyText: {fileID: 0}
   randomNumber: 0
+  updatedMoney: 0
 --- !u!114 &1615314816
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18602,7 +18608,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1620599396
 Transform:
   m_ObjectHideFlags: 0
@@ -25941,7 +25947,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 10
   m_WholeNumbers: 0
-  m_Value: 0
+  m_Value: 10
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -26060,7 +26066,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1954738324
 RectTransform:
   m_ObjectHideFlags: 0

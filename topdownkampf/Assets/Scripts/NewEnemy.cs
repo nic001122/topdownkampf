@@ -19,10 +19,7 @@ public class NewEnemy : MonoBehaviour
 
     private void Update()
     {
-        if (playerLantern.intensity == 0)
-        {
-            agent.SetDestination(target.position);
-        }
+        
         
     }
 }
