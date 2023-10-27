@@ -17,7 +17,7 @@ public class LightBattery : MonoBehaviour
 
     void Start()
     {
-        lantern.intensity = 0;
+        
         currentValueLight = maxValueLight;
     }
 
@@ -38,9 +38,6 @@ public class LightBattery : MonoBehaviour
         {
             
              lantern.intensity = 0;
-             currentValueLight += Time.deltaTime;
-            
-            
 
         }
         if (lightBatterySlider.value > 0)

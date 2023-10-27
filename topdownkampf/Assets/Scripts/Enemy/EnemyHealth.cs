@@ -27,10 +27,7 @@ public class EnemyHealth : MonoBehaviour
         if(enemyHealth <= 0f)
         {
             Destroy(gameObject, timeToEnemyDestruction);
-            enemyDamage.Play();
-            Debug.Log(moneyScript.moneyCount);
-            moneyScript.addMoney();
-            SFXScript.EnemyDeathSound();
+            
 
         }
 
@@ -57,5 +54,12 @@ public class EnemyHealth : MonoBehaviour
                 enemyTookDmg = true;
             }
         }
+    }
+    private void OnDestroy()
+    {
+        enemyDamage.Play();
+        Debug.Log(moneyScript.moneyCount);
+        moneyScript.addMoney();
+        SFXScript.EnemyDeathSound();
     }
 }

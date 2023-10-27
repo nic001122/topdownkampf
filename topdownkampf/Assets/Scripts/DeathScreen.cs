@@ -15,9 +15,10 @@ public class DeathScreen : MonoBehaviour
     {
         if(health.currentHealth <= 0)
         {
+            SFXScript.PlayerDeathSound();
             deathScreen.SetActive(true);
             gameObject.SetActive(false);
-            SFXScript.PlayerDeathSound();
+            
         }
     }
 
