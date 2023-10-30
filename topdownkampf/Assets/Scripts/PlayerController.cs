@@ -48,7 +48,6 @@ public class PlayerController : MonoBehaviour
 
             if(timer >= timeToAttack)
             {
-                enemyHealth.enemyTookDmg = false;
                 isAttacking = false;
                 timer = 0;
 
