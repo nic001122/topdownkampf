@@ -37,8 +37,6 @@ public class AttackWest : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        
-
         if(collision.CompareTag("Player"))
         {
             playerIsInRange = true;
@@ -56,11 +54,6 @@ public class AttackWest : MonoBehaviour
 
     void OnTriggerStay2D()
     {
-        if(newEnemy.playerLantern.intensity > 0)
-        {
-            return;
-        }
-
         if
         (
             enemyDetermineChildren.isAttackingNorthWest == false &&

@@ -21,17 +21,14 @@ public class EnemyHealth : MonoBehaviour
     public float timeToEnemyDestruction;
     
     public void Update()
-
     {
-        
         if(enemyHealth <= 0f)
         {
             Destroy(gameObject, timeToEnemyDestruction);
-            
-
+            enemyDamage.transform.position = gameObject.transform.position;
+            enemyDamage.Play();
         }
 
-        
         if(enemyTookDmg)
         {
             timer += Time.deltaTime;
@@ -43,6 +40,7 @@ public class EnemyHealth : MonoBehaviour
             }
         }
     }
+
     private void OnTriggerEnter2D(Collider2D collider)
     {
         if(!enemyTookDmg)
@@ -50,16 +48,18 @@ public class EnemyHealth : MonoBehaviour
             if(collider.gameObject.CompareTag("AttackRange"))
             {
                 enemyHealth -= health.playerAttackDamage;
+                enemyDamage.transform.position = gameObject.transform.position;
                 enemyDamage.Play();
                 enemyTookDmg = true;
             }
         }
     }
+
     private void OnDestroy()
     {
-        enemyDamage.Play();
         Debug.Log(moneyScript.moneyCount);
         moneyScript.addMoney();
         SFXScript.EnemyDeathSound();
+        enemyDamage.Play();
     }
 }

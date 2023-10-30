@@ -25,11 +25,6 @@ public class AttackSouthWest : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(newEnemy.playerLantern.intensity > 0)
-        {
-            return;
-        }
-
         if
         (
             enemyDetermineChildren.isAttackingNorthWest == false &&
@@ -89,8 +84,6 @@ public class AttackSouthWest : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        
-
         if(collision.CompareTag("Player"))
         {
             playerIsInRange = true;
