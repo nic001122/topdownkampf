@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem.XR.Haptics;
 using UnityEngine.UI;
@@ -43,60 +44,52 @@ public class Health : MonoBehaviour
     // Update is called once per frame
     void Update() 
     {
-            if(currentHealth == 10)
-            {
-                healthBarSR.sprite = tenHPSprite;
-            }
+        switch (currentHealth)
+        {
+            case 0:
+            healthBarSR.sprite  = zeroHPSprite;
+            break;
 
-            else if(currentHealth == 9)
-            {
-                healthBarSR.sprite = nineHPSprite;
-            }
+            case 1:
+            healthBarSR.sprite = oneHpSprite;
+            break;
 
-            else if(currentHealth == 8)
-            {
-                healthBarSR.sprite = eightHPSprite;
-            }
+            case 2:
+            healthBarSR.sprite = twoHPSprite;
+            break;
 
-            else if(currentHealth == 7)
-            {
-                healthBarSR.sprite = sevenHPSprite;
-            }
+            case 3:
+            healthBarSR.sprite = threeHPSprite;
+            break;
 
-            else if(currentHealth == 6)
-            {
-                healthBarSR.sprite = sixHPSprite;
-            }
+            case 4:
+            healthBarSR.sprite = fourHPSprite;
+            break;
 
-            else if(currentHealth == 5)
-            {
-                healthBarSR.sprite = fiveHPSprite;
-            }
+            case 5:
+            healthBarSR.sprite = fiveHPSprite;
+            break;
 
-            else if(currentHealth == 4)
-            {
-                healthBarSR.sprite = fourHPSprite;
-            }
+            case 6:
+            healthBarSR.sprite = sixHPSprite;
+            break;
 
-            else if(currentHealth == 3)
-            {
-                healthBarSR.sprite = threeHPSprite;
-            }
+            case 7:
+            healthBarSR.sprite = sevenHPSprite; 
+            break;
+            
+            case 8:
+            healthBarSR.sprite = eightHPSprite;
+            break;
 
-            else if(currentHealth == 2)
-            {
-                healthBarSR.sprite = twoHPSprite;
-            }
+            case 9:
+            healthBarSR.sprite = nineHPSprite;
+            break;
 
-            else if(currentHealth == 1)
-            {
-                healthBarSR.sprite = oneHpSprite;
-            }
-
-            if(currentHealth <= 0)
-            {
-                healthBarSR.sprite = zeroHPSprite;
-            }
+            case 10:
+            healthBarSR.sprite = tenHPSprite;
+            break;
+        }
     }
 
     public void OnTriggerEnter2D(Collider2D collision)

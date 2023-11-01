@@ -9,7 +9,18 @@ using UnityEngine.UI;
  
 public class Stamina : MonoBehaviour
 {
-    [SerializeField] Slider staminaSlider;
+    public SpriteRenderer staminaSR;
+    public Sprite zeroStaminaSprite;
+    public Sprite oneStaminaSprite;
+    public Sprite twoStaminaSprite;
+    public Sprite threeStaminaSprite;
+    public Sprite fourStaminaSprite;
+    public Sprite fiveStaminaSprite;
+    public Sprite sixStaminaSprite;
+    public Sprite sevenStaminaSprite;
+    public Sprite eighStaminaSprite;
+    public Sprite nineStaminaSprite;
+    public Sprite tenStaminaSprite;
  
     public float maxStamina = 10;
     public float currentStamina;
@@ -30,20 +41,7 @@ public class Stamina : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        staminaSlider.value = tempStamina;
- 
-        if(tempStamina != currentStamina)
-        {
-            if(tempStamina < currentStamina)
-            {
-                tempStamina += 2f * Time.deltaTime;
-            }
- 
-            if(tempStamina > currentStamina)
-            {
-                tempStamina -= 2f * Time.deltaTime;
-            }
-        }
+        staminaSpriteCheck();
  
         if(staminaIsRefilling)
         {
@@ -75,6 +73,56 @@ public class Stamina : MonoBehaviour
         if(staminaIsBeingUsed && currentStamina < maxStamina && tempStamina < maxStamina && currentStamina >= tempStamina)
         {
             startRefillTimer = 0f;
+        }
+    }
+
+    public void staminaSpriteCheck()
+    {
+        switch(currentStamina)
+        {
+            case 0:
+            staminaSR.sprite = zeroStaminaSprite;
+            break;
+            
+            case 1:
+            staminaSR.sprite = oneStaminaSprite;
+            break;
+
+            case 2:
+            staminaSR.sprite = twoStaminaSprite;
+            break;
+
+            case 3:
+            staminaSR.sprite = threeStaminaSprite;
+            break;
+
+            case 4:
+            staminaSR.sprite = fourStaminaSprite;
+            break;
+
+            case 5:
+            staminaSR.sprite = fiveStaminaSprite;
+            break;
+
+            case 6:
+            staminaSR.sprite = sixStaminaSprite;
+            break;
+
+            case 7:
+            staminaSR.sprite = sevenStaminaSprite;
+            break;
+
+            case 8:
+            staminaSR.sprite = eighStaminaSprite;
+            break;
+
+            case 9:
+            staminaSR.sprite = nineStaminaSprite;
+            break;
+
+            case 10:
+            staminaSR.sprite = tenStaminaSprite;
+            break;
         }
     }
 }
