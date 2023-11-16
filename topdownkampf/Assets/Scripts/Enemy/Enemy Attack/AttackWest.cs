@@ -24,9 +24,7 @@ public class AttackWest : MonoBehaviour
 
     [SerializeField] float endOfAttackTimer = 0f;
     [SerializeField] float endOfAttack = 0.25f;
-
-
-    public NewEnemy newEnemy;
+    
 
     // Start is called before the first frame update
     void Start()
@@ -37,13 +35,6 @@ public class AttackWest : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //if(newEnemy.playerLantern.intensity > 0)
-       // {
-       //     return;
-      //  }
-
-        // Enemy Attack
-
         if
         (
             enemyDetermineChildren.isAttackingNorthWest == false &&

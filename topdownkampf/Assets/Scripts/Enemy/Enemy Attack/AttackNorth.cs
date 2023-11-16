@@ -6,21 +6,32 @@ using UnityEngine.AI;
 
 public class AttackNorth : MonoBehaviour
 {
+
     public EnemyDetermineChildren enemyDetermineChildren;
 
     [SerializeField] bool playerIsInRange = false;
 
-    [SerializeField] float timeBtwAttack = 0.25f;
+    [SerializeField] bool firstAttackHappened = false;
+    [SerializeField] bool boolBtwAttack = false;
+    float timeReset = 0f;
+
     [SerializeField] float btwAttackTimer = 0f;
-    [SerializeField] float timerBeforeFirstAttack = 0f;
+    [SerializeField] float maxBtwAttackTimer = 1f;
 
+    [SerializeField] float timeBeforeFirstAttack = 0f;
+    [SerializeField] float maxBeforeFirstAttack = 1f;
 
-    public NewEnemy newEnemy;
+    [SerializeField] float firstEndOfAttackTimer = 0f;
+    [SerializeField] float firstEndOfAttack = 0.25f;
+
+    [SerializeField] float endOfAttackTimer = 0f;
+    [SerializeField] float endOfAttack = 0.25f;
+    
 
     // Start is called before the first frame update
     void Start()
     {
-
+        btwAttackTimer = maxBtwAttackTimer;
     }
 
     // Update is called once per frame
@@ -36,50 +47,65 @@ public class AttackNorth : MonoBehaviour
 
             enemyDetermineChildren.isAttackingSouth == false &&
 
-            enemyDetermineChildren.isAttackingWest == false &&
             enemyDetermineChildren.isAttackingEast == false &&
+            enemyDetermineChildren.isAttackingWest == false &&
 
-            timerBeforeFirstAttack >= 0f
+            btwAttackTimer >= maxBtwAttackTimer &&
+
+            playerIsInRange
         )
-        
+
         {
-            if(playerIsInRange)
+
+            if(firstAttackHappened)
             {
-                timerBeforeFirstAttack += Time.deltaTime;
-                if(timerBeforeFirstAttack >= 1)
+                enemyDetermineChildren.attackRangeNorth.SetActive(true);
+                enemyDetermineChildren.isAttackingNorth = true;
+
+                endOfAttackTimer += Time.deltaTime;
+
+                if(endOfAttackTimer >= endOfAttack)
+                {
+                    endOfAttackTimer = timeReset;
+                    btwAttackTimer = timeReset;
+                    enemyDetermineChildren.attackRangeNorth.SetActive(false);
+                    enemyDetermineChildren.isAttackingNorth = false;
+                    boolBtwAttack = true;
+                }
+            }
+
+            else if(!firstAttackHappened)
+            {
+                timeBeforeFirstAttack += Time.deltaTime;
+
+                if(timeBeforeFirstAttack >= maxBeforeFirstAttack)
                 {
                     enemyDetermineChildren.attackRangeNorth.SetActive(true);
                     enemyDetermineChildren.isAttackingNorth = true;
 
-                    if(btwAttackTimer >= timeBtwAttack)
+                    firstEndOfAttackTimer += Time.deltaTime;
+
+                    if(firstEndOfAttackTimer >= firstEndOfAttack)
                     {
+                        timeBeforeFirstAttack = timeReset;
+                        btwAttackTimer = timeReset;
                         enemyDetermineChildren.attackRangeNorth.SetActive(false);
+                        enemyDetermineChildren.isAttackingNorth = false;
+                        firstAttackHappened = true;
+                        boolBtwAttack = true;
                     }
                 }
             }
-
-            if(enemyDetermineChildren.isAttackingNorth)
-            {
-                btwAttackTimer += Time.deltaTime;
-            }
-
-            if(btwAttackTimer >= timeBtwAttack)
-            {
-                enemyDetermineChildren.attackRangeNorth.SetActive(false);
-                enemyDetermineChildren.isAttackingNorth = false;
-
-                btwAttackTimer = 0f;
-            }
-
-            if(btwAttackTimer > 0)
-            {
-                btwAttackTimer = 0f;
-            }
         }
 
-        if(timerBeforeFirstAttack >= 1f)
+        if(boolBtwAttack)
         {
-            timerBeforeFirstAttack = 0f;
+            btwAttackTimer += Time.deltaTime;
+
+            if(btwAttackTimer >= maxBtwAttackTimer)
+            {
+                boolBtwAttack = false;
+            }
         }
     }
 
@@ -95,8 +121,9 @@ public class AttackNorth : MonoBehaviour
     {
         playerIsInRange = false;
 
-        btwAttackTimer = 0f;
+        firstAttackHappened = false;
 
-        timerBeforeFirstAttack = 1f;
+        btwAttackTimer = timeReset;
+        timeBeforeFirstAttack = timeReset;
     }
 }

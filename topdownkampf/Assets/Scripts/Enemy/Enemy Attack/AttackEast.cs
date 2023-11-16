@@ -4,21 +4,32 @@ using UnityEngine;
 
 public class AttackEast : MonoBehaviour
 {
+
     public EnemyDetermineChildren enemyDetermineChildren;
 
     [SerializeField] bool playerIsInRange = false;
 
-    [SerializeField] float timeBtwAttack = 1f;
+    [SerializeField] bool firstAttackHappened = false;
+    [SerializeField] bool boolBtwAttack = false;
+    float timeReset = 0f;
+
     [SerializeField] float btwAttackTimer = 0f;
+    [SerializeField] float maxBtwAttackTimer = 1f;
+
     [SerializeField] float timeBeforeFirstAttack = 0f;
+    [SerializeField] float maxBeforeFirstAttack = 1f;
 
+    [SerializeField] float firstEndOfAttackTimer = 0f;
+    [SerializeField] float firstEndOfAttack = 0.25f;
 
-    public NewEnemy newEnemy;
+    [SerializeField] float endOfAttackTimer = 0f;
+    [SerializeField] float endOfAttack = 0.25f;
+    
 
     // Start is called before the first frame update
     void Start()
     {
-
+        btwAttackTimer = maxBtwAttackTimer;
     }
 
     // Update is called once per frame
@@ -37,42 +48,61 @@ public class AttackEast : MonoBehaviour
 
             enemyDetermineChildren.isAttackingWest == false &&
 
+            btwAttackTimer >= maxBtwAttackTimer &&
 
-            timeBeforeFirstAttack >= 0f
+            playerIsInRange
         )
-        
+
         {
-            if(playerIsInRange)
+
+            if(firstAttackHappened)
+            {
+                enemyDetermineChildren.attackRangeEast.SetActive(true);
+                enemyDetermineChildren.isAttackingEast = true;
+
+                endOfAttackTimer += Time.deltaTime;
+
+                if(endOfAttackTimer >= endOfAttack)
+                {
+                    endOfAttackTimer = timeReset;
+                    btwAttackTimer = timeReset;
+                    enemyDetermineChildren.attackRangeEast.SetActive(false);
+                    enemyDetermineChildren.isAttackingEast = false;
+                    boolBtwAttack = true;
+                }
+            }
+
+            else if(!firstAttackHappened)
             {
                 timeBeforeFirstAttack += Time.deltaTime;
-                if(timeBeforeFirstAttack >= 1)
+
+                if(timeBeforeFirstAttack >= maxBeforeFirstAttack)
                 {
                     enemyDetermineChildren.attackRangeEast.SetActive(true);
                     enemyDetermineChildren.isAttackingEast = true;
 
-                    if(btwAttackTimer >= timeBtwAttack)
+                    firstEndOfAttackTimer += Time.deltaTime;
+
+                    if(firstEndOfAttackTimer >= firstEndOfAttack)
                     {
+                        timeBeforeFirstAttack = timeReset;
+                        btwAttackTimer = timeReset;
                         enemyDetermineChildren.attackRangeEast.SetActive(false);
+                        enemyDetermineChildren.isAttackingEast = false;
+                        firstAttackHappened = true;
+                        boolBtwAttack = true;
                     }
                 }
             }
+        }
 
-            if(enemyDetermineChildren.isAttackingEast)
+        if(boolBtwAttack)
+        {
+            btwAttackTimer += Time.deltaTime;
+
+            if(btwAttackTimer >= maxBtwAttackTimer)
             {
-                btwAttackTimer += Time.deltaTime;
-            }
-
-            if(btwAttackTimer >= timeBtwAttack)
-            {
-                enemyDetermineChildren.attackRangeEast.SetActive(false);
-                enemyDetermineChildren.isAttackingEast = false;
-
-                btwAttackTimer = 0f;
-            }
-
-            if(btwAttackTimer > 0)
-            {
-                btwAttackTimer = 0f;
+                boolBtwAttack = false;
             }
         }
     }
@@ -89,8 +119,9 @@ public class AttackEast : MonoBehaviour
     {
         playerIsInRange = false;
 
-        btwAttackTimer = 0f;
+        firstAttackHappened = false;
 
-        timeBeforeFirstAttack = 1f;
+        btwAttackTimer = timeReset;
+        timeBeforeFirstAttack = timeReset;
     }
 }
