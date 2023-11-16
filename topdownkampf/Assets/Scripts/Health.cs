@@ -7,8 +7,6 @@ using UnityEngine.UI;
 
 public class Health : MonoBehaviour
 {
-    public SFX SFXScript;
-
     public ParticleSystem playerDamage;
 
     public int maxHealth = 10;
@@ -17,11 +15,8 @@ public class Health : MonoBehaviour
 
     public float playerAttackDamage = 2f;
     public int enemyAttackDamage = 2;
-    [SerializeField] float timeBtwAttack = 1f;
-    [SerializeField] float btwAttackTimer = 0f;
-    public bool isInEnemyAttackRange = false;
 
-
+    // Health Bar
     public SpriteRenderer healthBarSR;
     public Sprite zeroHPSprite;
     public Sprite oneHpSprite;
@@ -96,26 +91,8 @@ public class Health : MonoBehaviour
     {
         if(collision.CompareTag("Enemy Attack Range"))
         {
-            isInEnemyAttackRange = true;
+            currentHealth -= enemyAttackDamage;
+            playerDamage.Play();
         }
-    }
-
-    public void OnTriggerStay2D(Collider2D collision)
-    {
-        if(collision.CompareTag("Enemy Attack Range") && isInEnemyAttackRange)
-        {
-            btwAttackTimer += Time.deltaTime;
-            if(btwAttackTimer >= timeBtwAttack)
-            {
-                playerDamage.Play();
-                currentHealth -= enemyAttackDamage;
-                btwAttackTimer = 0f;
-            }
-        }
-    }
-
-    public void OnTriggerExit2D()
-    {
-        btwAttackTimer = 0f;
     }
 }

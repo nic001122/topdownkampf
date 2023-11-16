@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 
 public class AttackWest : MonoBehaviour
@@ -8,9 +9,21 @@ public class AttackWest : MonoBehaviour
 
     [SerializeField] bool playerIsInRange = false;
 
-    [SerializeField] float timeBtwAttack = 0.25f;
+    [SerializeField] bool firstAttackHappened = false;
+    [SerializeField] bool boolBtwAttack = false;
+    float timeReset = 0f;
+
     [SerializeField] float btwAttackTimer = 0f;
-    [SerializeField] float timerBeforeFirstAttack = 0f;
+    [SerializeField] float maxBtwAttackTimer = 1f;
+
+    [SerializeField] float timeBeforeFirstAttack = 0f;
+    [SerializeField] float maxBeforeFirstAttack = 1f;
+
+    [SerializeField] float firstEndOfAttackTimer = 0f;
+    [SerializeField] float firstEndOfAttack = 0.25f;
+
+    [SerializeField] float endOfAttackTimer = 0f;
+    [SerializeField] float endOfAttack = 0.25f;
 
 
     public NewEnemy newEnemy;
@@ -18,20 +31,88 @@ public class AttackWest : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        btwAttackTimer = maxBtwAttackTimer;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(newEnemy.playerLantern.intensity > 0)
+        //if(newEnemy.playerLantern.intensity > 0)
+       // {
+       //     return;
+      //  }
+
+        // Enemy Attack
+
+        if
+        (
+            enemyDetermineChildren.isAttackingNorthWest == false &&
+            enemyDetermineChildren.isAttackingNorthEast == false &&
+            
+            enemyDetermineChildren.isAttackingSouthWest == false &&
+            enemyDetermineChildren.isAttackingSouthEast == false &&
+
+            enemyDetermineChildren.isAttackingNorth == false &&
+            enemyDetermineChildren.isAttackingSouth == false &&
+
+            enemyDetermineChildren.isAttackingEast == false &&
+
+            btwAttackTimer >= maxBtwAttackTimer &&
+
+            playerIsInRange
+        )
+
         {
-            return;
+
+            if(firstAttackHappened)
+            {
+                enemyDetermineChildren.attackRangeWest.SetActive(true);
+                enemyDetermineChildren.isAttackingWest = true;
+
+                endOfAttackTimer += Time.deltaTime;
+
+                if(endOfAttackTimer >= endOfAttack)
+                {
+                    endOfAttackTimer = timeReset;
+                    btwAttackTimer = timeReset;
+                    enemyDetermineChildren.attackRangeWest.SetActive(false);
+                    enemyDetermineChildren.isAttackingWest = false;
+                    boolBtwAttack = true;
+                }
+            }
+
+            else if(!firstAttackHappened)
+            {
+                timeBeforeFirstAttack += Time.deltaTime;
+
+                if(timeBeforeFirstAttack >= maxBeforeFirstAttack)
+                {
+                    enemyDetermineChildren.attackRangeWest.SetActive(true);
+                    enemyDetermineChildren.isAttackingWest = true;
+
+                    firstEndOfAttackTimer += Time.deltaTime;
+
+                    if(firstEndOfAttackTimer >= firstEndOfAttack)
+                    {
+                        timeBeforeFirstAttack = timeReset;
+                        btwAttackTimer = timeReset;
+                        enemyDetermineChildren.attackRangeWest.SetActive(false);
+                        enemyDetermineChildren.isAttackingWest = false;
+                        firstAttackHappened = true;
+                        boolBtwAttack = true;
+                    }
+                }
+            }
         }
 
-        if(timerBeforeFirstAttack >= 1f)
+        if(boolBtwAttack)
         {
-            timerBeforeFirstAttack = 0f;
+            btwAttackTimer += Time.deltaTime;
+
+            if(btwAttackTimer >= maxBtwAttackTimer)
+            {
+                boolBtwAttack = false;
+            }
         }
     }
 
@@ -47,67 +128,9 @@ public class AttackWest : MonoBehaviour
     {
         playerIsInRange = false;
 
-        btwAttackTimer = 0f;
+        firstAttackHappened = false;
 
-        timerBeforeFirstAttack = 1f;
-    }
-
-    void OnTriggerStay2D()
-    {
-        if
-        (
-            enemyDetermineChildren.isAttackingNorthWest == false &&
-            enemyDetermineChildren.isAttackingNorthEast == false &&
-            
-            enemyDetermineChildren.isAttackingSouthWest == false &&
-            enemyDetermineChildren.isAttackingSouthEast == false &&
-
-            enemyDetermineChildren.isAttackingNorth == false &&
-            enemyDetermineChildren.isAttackingSouth == false &&
-
-            enemyDetermineChildren.isAttackingEast == false &&
-
-            timerBeforeFirstAttack >= 0f
-        )
-        
-        {
-            if(playerIsInRange)
-            {
-                timerBeforeFirstAttack += Time.deltaTime;
-                if(timerBeforeFirstAttack >= 1)
-                {
-                    enemyDetermineChildren.attackRangeWest.SetActive(true);
-                    enemyDetermineChildren.isAttackingWest = true;
-
-                    if(btwAttackTimer >= timeBtwAttack)
-                    {
-                        enemyDetermineChildren.attackRangeWest.SetActive(false);
-                    }
-                }
-            }
-
-            if(enemyDetermineChildren.isAttackingWest)
-            {
-                btwAttackTimer += Time.deltaTime;
-            }
-
-            if(btwAttackTimer >= timeBtwAttack)
-            {
-                enemyDetermineChildren.attackRangeWest.SetActive(false);
-                enemyDetermineChildren.isAttackingWest = false;
-
-                btwAttackTimer = 0f;
-            }
-
-            if(btwAttackTimer > 0)
-            {
-                btwAttackTimer = 0f;
-            }
-        }
-        
-        if(timerBeforeFirstAttack >= 1f)
-        {
-            timerBeforeFirstAttack = 0f;
-        }
+        btwAttackTimer = timeReset;
+        timeBeforeFirstAttack = timeReset;
     }
 }
