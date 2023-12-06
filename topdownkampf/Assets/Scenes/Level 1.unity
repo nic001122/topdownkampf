@@ -867,15 +867,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 774e262dcbeabc144a7011b832fcac2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SFXScript: {fileID: 0}
   playerDamage: {fileID: 752796943}
   maxHealth: 10
   currentHealth: 0
   playerAttackDamage: 2
   enemyAttackDamage: 2
-  timeBtwAttack: 1
-  btwAttackTimer: 0
-  isInEnemyAttackRange: 0
   healthBarSR: {fileID: 1865744614}
   zeroHPSprite: {fileID: 0}
   oneHpSprite: {fileID: 0}
@@ -2036,10 +2032,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyDetermineChildren: {fileID: 762186591}
   playerIsInRange: 0
-  timeBtwAttack: 1
+  firstAttackHappened: 0
+  boolBtwAttack: 0
   btwAttackTimer: 0
-  timerBeforeFirstAttack: 0
-  newEnemy: {fileID: 762186587}
+  maxBtwAttackTimer: 1
+  timeBeforeFirstAttack: 0
+  maxBeforeFirstAttack: 1
+  firstEndOfAttackTimer: 0
+  firstEndOfAttack: 0.25
+  endOfAttackTimer: 0
+  endOfAttack: 0.25
 --- !u!60 &234638448
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -5288,10 +5290,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyDetermineChildren: {fileID: 762186591}
   playerIsInRange: 0
-  timeBtwAttack: 1
+  firstAttackHappened: 0
+  boolBtwAttack: 0
   btwAttackTimer: 0
-  timerBeforeFirstAttack: 0
-  newEnemy: {fileID: 762186587}
+  maxBtwAttackTimer: 1
+  timeBeforeFirstAttack: 0
+  maxBeforeFirstAttack: 1
+  firstEndOfAttackTimer: 0
+  firstEndOfAttack: 0.25
+  endOfAttackTimer: 0
+  endOfAttack: 0.25
 --- !u!60 &721392858
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -5513,10 +5521,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyDetermineChildren: {fileID: 762186591}
   playerIsInRange: 0
-  timeBtwAttack: 1
+  firstAttackHappened: 0
+  boolBtwAttack: 0
   btwAttackTimer: 0
+  maxBtwAttackTimer: 1
   timeBeforeFirstAttack: 1
-  newEnemy: {fileID: 762186587}
+  maxBeforeFirstAttack: 1
+  firstEndOfAttackTimer: 0
+  firstEndOfAttack: 0.25
+  endOfAttackTimer: 0
+  endOfAttack: 0.25
 --- !u!60 &744128939
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -10549,6 +10563,7 @@ GameObject:
   - component: {fileID: 762186590}
   - component: {fileID: 762186592}
   - component: {fileID: 762186591}
+  - component: {fileID: 762186594}
   m_Layer: 0
   m_Name: Enemy 2nd
   m_TagString: Enemy
@@ -10736,6 +10751,27 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
+--- !u!114 &762186594
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 762186586}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92d9b114368314b45a7be77ca959fc99, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sr: {fileID: 762186588}
+  lookingNorth: {fileID: 882830667, guid: 52f76c57a1409124ea36160dd2110930, type: 3}
+  lookingSouth: {fileID: -177441334, guid: 52f76c57a1409124ea36160dd2110930, type: 3}
+  lookingWest: {fileID: -1116454781, guid: 52f76c57a1409124ea36160dd2110930, type: 3}
+  lookingEast: {fileID: -1969312459, guid: 52f76c57a1409124ea36160dd2110930, type: 3}
+  lookingNorthWest: {fileID: -1487344042, guid: 52f76c57a1409124ea36160dd2110930, type: 3}
+  lookingNorthEast: {fileID: 114529820, guid: 52f76c57a1409124ea36160dd2110930, type: 3}
+  lookingSouthWest: {fileID: 1026552233, guid: 52f76c57a1409124ea36160dd2110930, type: 3}
+  lookingSouthEast: {fileID: -1869101132, guid: 52f76c57a1409124ea36160dd2110930, type: 3}
 --- !u!1 &766372930
 GameObject:
   m_ObjectHideFlags: 0
@@ -10783,10 +10819,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyDetermineChildren: {fileID: 762186591}
   playerIsInRange: 0
-  timeBtwAttack: 1
+  firstAttackHappened: 0
+  boolBtwAttack: 0
   btwAttackTimer: 0
-  timerBeforeFirstAttack: 0
-  newEnemy: {fileID: 762186587}
+  maxBtwAttackTimer: 1
+  timeBeforeFirstAttack: 0
+  maxBeforeFirstAttack: 1
+  firstEndOfAttackTimer: 0
+  firstEndOfAttack: 0.25
+  endOfAttackTimer: 0
+  endOfAttack: 0.25
 --- !u!60 &766372933
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -11155,10 +11197,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyDetermineChildren: {fileID: 762186591}
   playerIsInRange: 0
-  timeBtwAttack: 1
+  firstAttackHappened: 0
+  boolBtwAttack: 0
   btwAttackTimer: 0
-  timerBeforeFirstAttack: 0
-  newEnemy: {fileID: 762186587}
+  maxBtwAttackTimer: 1
+  timeBeforeFirstAttack: 0
+  maxBeforeFirstAttack: 1
+  firstEndOfAttackTimer: 0
+  firstEndOfAttack: 0.25
+  endOfAttackTimer: 0
+  endOfAttack: 0.25
 --- !u!60 &829109289
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -12559,10 +12607,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyDetermineChildren: {fileID: 762186591}
   playerIsInRange: 0
-  timeBtwAttack: 1
+  firstAttackHappened: 0
+  boolBtwAttack: 0
   btwAttackTimer: 0
-  timerBeforeFirstAttack: 0
-  newEnemy: {fileID: 762186587}
+  maxBtwAttackTimer: 1
+  timeBeforeFirstAttack: 0
+  maxBeforeFirstAttack: 1
+  firstEndOfAttackTimer: 0
+  firstEndOfAttack: 0.25
+  endOfAttackTimer: 0
+  endOfAttack: 0.25
 --- !u!60 &1113408193
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -15567,10 +15621,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyDetermineChildren: {fileID: 762186591}
   playerIsInRange: 0
-  timeBtwAttack: 1
+  firstAttackHappened: 0
+  boolBtwAttack: 0
   btwAttackTimer: 0
-  timerBeforeFirstAttack: 0
-  newEnemy: {fileID: 762186587}
+  maxBtwAttackTimer: 1
+  timeBeforeFirstAttack: 0
+  maxBeforeFirstAttack: 1
+  firstEndOfAttackTimer: 0
+  firstEndOfAttack: 0.25
+  endOfAttackTimer: 0
+  endOfAttack: 0.25
 --- !u!60 &1434607774
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -18285,10 +18345,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyDetermineChildren: {fileID: 762186591}
   playerIsInRange: 0
-  timeBtwAttack: 1
+  firstAttackHappened: 0
+  boolBtwAttack: 0
   btwAttackTimer: 0
-  timerBeforeFirstAttack: 0
-  newEnemy: {fileID: 762186587}
+  maxBtwAttackTimer: 1
+  timeBeforeFirstAttack: 0
+  maxBeforeFirstAttack: 1
+  firstEndOfAttackTimer: 0
+  firstEndOfAttack: 0.25
+  endOfAttackTimer: 0
+  endOfAttack: 0.25
 --- !u!60 &1824505774
 PolygonCollider2D:
   m_ObjectHideFlags: 0
